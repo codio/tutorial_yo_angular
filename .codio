@@ -1,0 +1,13 @@
+{
+// Configure your Run and Preview buttons here.
+
+// Run button configuration
+  "commands": {
+        "Grunt Serve": "grunt serve"
+  },
+
+// Preview button configuration
+  "preview": {
+        "Yeoman Demo": "http://{{domain}}:9000/"
+  }
+}
