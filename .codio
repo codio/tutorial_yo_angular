@@ -3,11 +3,14 @@
 
 // Run button configuration
   "commands": {
-        "Grunt Serve": "grunt serve"
+    "Grunt Serve": "grunt serve",
+    "Grunt Test": "grunt test",
+    "Grunt Build": "grunt",
+    "Grunt Serve:Dist": "grunt serve:dist"
   },
 
 // Preview button configuration
   "preview": {
-        "Yeoman Demo": "http://{{domain}}:9000/"
+    "Yeoman Demo": "http://{{domain}}:9000/"
   }
 }
