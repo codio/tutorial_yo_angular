@@ -168,7 +168,7 @@ With both `grunt serve` still running in the background and the Preview tab stil
 @annotation:tour step1
 #Create a new Template to show a ToDo list
 ###app/views/main.html
-First, let's modify our view (views/main.html) to output our todos items as text input fields. Copy and paste the following code into the `app/views/main.html` window.
+First, let's modify our view (views/main.html) to output our todos items as text input fields. Copy and paste the following code into the `app/views/main.html` file (replace everything).
 
     <div class="container">
       <h2>My todos</h2>
@@ -178,7 +178,7 @@ First, let's modify our view (views/main.html) to output our todos items as text
     </div>
 
 ###app/scripts/controllers/main.js
-Now, let's modify the controller script by pasting in this code
+Now, let's modify the controller script by repolacing everything with ...
 
     'use strict';
 
@@ -187,10 +187,138 @@ Now, let's modify the controller script by pasting in this code
         $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
       });
 
-The [ng-repeat](http://docs.angularjs.org/api/ng.directive:ngRepeat) attribute on the paragraph tag is an [Angular directive](http://docs.angularjs.org/guide/directive) that instantiates a template once per item from a collection. In our case, imagine that the paragraph element and its content is turned into a virtual rubber stamp by adding the ng-repeat attribute. For each item in the todos array, Angular will stamp out a new instance of the <p><input></p> HTML.
+The [ng-repeat](http://docs.angularjs.org/api/ng.directive:ngRepeat) attribute on the paragraph tag is an [Angular directive](http://docs.angularjs.org/guide/directive) that instantiates a template once per item from a collection. In our case, imagine that the paragraph element and its content is turned into a virtual rubber stamp by adding the ng-repeat attribute. For each item in the todos array, Angular will stamp out a new instance of the `<p><input></p>` HTML.
 
 The [ng-model](http://docs.angularjs.org/api/ng.directive:ngModel) attribute is another Angular directive that works with input, select, textarea and custom controls to create a two-way data binding. In our example, it populates a text input field with the value from the current todo item in the ng-repeat loop.
 
 Your browser should now show something like this
 
 ![preview](img/preview-1.png)
+
+@annotation:tour step2
+#Adding a ToDo
+Let’s implement a way to add new todo items to the list of existing todos within the application.
+
+Modify `app/views/main.html` by adding a form element in between the `<h2>` and `<p>` elements from the previous section. Your views/main.html should now look like this:
+
+    <div class="container">
+      <h2>My todos</h2>
+
+      <!-- Todos input -->
+      <form role="form" ng-submit="addTodo()">
+        <div class="row">
+          <div class="input-group">
+            <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
+            <span class="input-group-btn">
+              <input type="submit" class="btn btn-primary" value="Add">
+            </span>
+          </div>
+        </div>
+      </form>
+      <p></p>
+
+      <!-- Todos list -->
+      <p class="form-group" ng-repeat="todo in todos">
+        <input type="text" ng-model="todo" class="form-control">
+      </p>
+    </div>
+
+This adds a form with a submit button to the top of the page. It utilises another Angular directive, [ng-submit](http://docs.angularjs.org/api/ng.directive:ngSubmit) which we’ll get to next. Return to your browser and the UI should now look similar to this:
+
+![preview](img/preview-2.png)
+
+@annotation:tour step3
+#Making the Add button work
+If you click the Add button currently, nothing will happen - let’s change that.
+
+`ng-submit` binds an angular expression to the onsubmit event of the form. If no action attribute is applied to the form, it also prevents the default browser behaviour. In our example we’ve added an angular expression of ‘addTodo()’.
+
+The following `addTodo` function pushes new todo items onto the existing todo items array and then clears the text input field. Let's add the following code inside the existing code
+
+    $scope.addTodo = function () {
+      $scope.todos.push($scope.todo);
+      $scope.todo = '';
+    };
+
+So, your `app/scripts/controllers/main.js` should now look like this  ...
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope) {
+        $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+        $scope.addTodo = function () {
+          $scope.todos.push($scope.todo);
+          $scope.todo = '';
+        };
+      });
+
+View the app in the browser again. Type some text in the input field for a new todo item and hit the Add button. It will be immediately reflected in your todos list. Here you can see I have added 2 new todos.
+
+**Note**: if you enter in more than one blank todo item, or a todo item with the same name, your todo app will unexpectedly stop working. :( As a fun exercise on your own time, enhance the addTodo function with error checking.
+
+![preview](img/preview-3.png)
+
+@annotation:tour remove-todo
+#Removing a ToDo
+Let’s now add the ability to remove a todo item. We’ll need to add a new remove button alongside each todo item.
+
+Going back to our view template (app/views/main.html), add a button to the existing `ng-repeat` directive. And to make sure our input field and remove button line up nicely, change the class on the paragraph tag from "form-group" to “input-group”.
+
+Replace the stuff below `<!-- Todos list -->` with this code
+
+    <!-- Todos list -->
+    <p class="input-group" ng-repeat="todo in todos">
+      <input type="text" ng-model="todo" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+      </span>
+    </p>
+
+then run your app again, and you should get this ...
+
+![remove](img/remove-buttons.png)
+
+We introduced a new Angular directive above, [ng-click](http://docs.angularjs.org/api/ng.directive:ngClick). ng-click allows you to specify custom behaviours when an element is clicked. In this instance, we call `removeTodo()` and pass $index to the function.
+
+The value of $index will be the array index of the current todo item within the ng-repeat directive. For example, the first item will have an array index of 0 and removeTodo will be passed the value of 0. Similarly, the last item of a todo list with 5 items will have an array index of 4 and `removeTodo` will be passed a value of 4.
+
+@annotation:tour remove-todo-working
+#Making the remove buttons work
+Let’s now add some logic for removing todo items to our controller. The following `removeTodo` function removes one todo item from the items array using the JavaScript `splice` method at the given `$index` value:
+
+    $scope.removeTodo = function (index) {
+      $scope.todos.splice(index, 1);
+    };
+
+The complete controller (app/scripts/controllers/main.js) with the new `removeTodo` function is below:
+
+'use strict';
+
+    angular.module('mytodoApp')
+      .controller('MainCtrl', function ($scope) {
+        $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+        $scope.addTodo = function () {
+          $scope.todos.push($scope.todo);
+          $scope.todo = '';
+        };
+        $scope.removeTodo = function (index) {
+          $scope.todos.splice(index, 1);
+        };
+      });
+
+Now you can use the 'x' buttons to remove items.
+
+One thing you might notice is that although we’re able to add and remove items, we don’t have a way to persist them. Any time we refresh the page our todo items are reset back to the defaults in our todos array hardcoding in `main.js`. 
+
+Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
+
+@annotation:tour remove-todo-working
+
+
+
+
+
+
+
+
