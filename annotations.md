@@ -295,7 +295,7 @@ The complete controller (app/scripts/controllers/main.js) with the new `removeTo
 
 'use strict';
 
-    angular.module('mytodoApp')
+    angular.module('workspaceApp')
       .controller('MainCtrl', function ($scope) {
         $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
         $scope.addTodo = function () {
@@ -313,9 +313,262 @@ One thing you might notice is that although we’re able to add and remove items
 
 Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
 
-@annotation:tour remove-todo-working
+@annotation:tour bower
+#Using Bower to install angular-local-storage
+We can check what packages we have already installed with:
+
+    $ bower list
+
+To easily achieve persistence, we can use another Angular module called [angular-local-storage](http://gregpike.net/demos/angular-local-storage/demo.html) that will allow us to quickly implement [Local Storage](http://diveintohtml5.info/storage.html). Bower comes to the rescue. Run the following command:
+
+    $ bower install --save angular-local-storage
+
+and you'll see something like this ...
+
+![bower install output](img/bower-install.png)
 
 
+@annotation:tour ls-mods1
+#Modifying index.html for Local Storage
+Modify `app/index.html` to include the new Angular module by add the following after the other Angular script tags:
+
+    <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+    
+**Note**: if using `bower.json`, you may need to Ctrl+C to exit the current `grunt serve` instance, run `bower install` and then re-run `grunt serve` to get some automated magic in your `index.html`.
+
+Your `index.html` scripts should now look like this:
+
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+
+@annotation:tour ls-mods2
+#Modifying app/scripts/app.js for Local Storage
+Edit the todo module (app/scripts/app.js) to include the `localStorage` adapter:
+
+    angular.module('workspaceApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ngRoute',
+      'LocalStorageModule'
+    ])
+
+While you’re in `app.js`, also configure `localStorageServiceProvider` to use ‘todo’ as a `localStorage` name prefix so your app doesn’t accidently read todos from another app using the same variable names:
+
+    .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+      localStorageServiceProvider.setPrefix('ls');
+    }])
+
+Our todo module (app/scripts/app.js) should now look like this:
+
+    'use strict';
+
+    angular.module('workspaceApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ngRoute',
+      'LocalStorageModule'
+    ])
+      .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+        localStorageServiceProvider.setPrefix('ls');
+      }])
+      .config(function ($routeProvider) {
+        $routeProvider
+          .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+          })
+          .otherwise({
+            redirectTo: '/'
+          });
+      });
+      
+@annotation:tour ls-mods3
+#Modifying app/scripts/controllers/main.js for Local Storage
+You will also need to update your controller (scripts/controllers/main.js) to declare a dependency on the `localStorage` service. Add `localStorageService` as the second parameter in the callback function.
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope, localStorageService) {
+        // (code hidden here to save space)
+      });
+
+So now, rather than reading our todos from a static array, we’ll be reading it from Local Storage and then storing it in `$scope.todos` instead.
+
+We’ll also use the angular [$watch](http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch) listener to watch for changes in the value of `$scope.todos`. If someone adds or removes a todo, it will then keep our `localStorage` todos datastore in sync.
+
+Therefore, we need to remove the current $scope.todos declaration:
+
+    $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+
+And replace it with this:
+
+    var todosInStore = localStorageService.get('todos');
+
+    $scope.todos = todosInStore && todosInStore.split('\n') || [];
+
+    $scope.$watch('todos', function () {
+      localStorageService.add('todos', $scope.todos.join('\n'));
+    }, true);
+
+We now have a controller that is as follows:
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope, localStorageService) {
+
+        var todosInStore = localStorageService.get('todos');
+
+        $scope.todos = todosInStore && todosInStore.split('\n') || [];
+
+        $scope.$watch('todos', function () {
+          localStorageService.add('todos', $scope.todos.join('\n'));
+        }, true);
+
+        $scope.addTodo = function () {
+          $scope.todos.push($scope.todo);
+          $scope.todo = '';
+        };
+
+        $scope.removeTodo = function (index) {
+          $scope.todos.splice(index, 1);
+        };
+
+      });
+
+If you look at your app in the browser now you’ll see that there are no items in the todo list. The app is initialising the todos array from `localStorage` and we haven’t given it any todo items yet.
+
+Go ahead and refresh the browser and start adding some items. Then refresh the browser and you'll see everything persisting nicely.
+
+@annotation:tour ls-devtools
+#Checking in Dev Tools
+We can confirm whether our data is being persisted to `localStorage` by checking the Resources panel in Chrome DevTools and selecting "Local Storage" from the lefthand side:
+
+![dev tools](img/dev-tools.png)
+
+Pat yourself on the back! You just used Yeoman to build a snazzy todo app in no time. Can you imagine doing front-end web development in any other way now?
+
+So to recap, in this section we:
+
+- Scaffolded the boilerplate for an application using `yo`
+- Installed dependencies to improve the functionality in our app with bower
+- Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
+
+
+@annotation:tour ready-production
+#Getting Ready for Production
+##Testing with Karma and Jasmine
+For those unfamiliar with Karma, it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: ngScenario and Jasmine. When we ran yo angular earlier in this Codelab, the generator scaffolded a test directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
+
+Let’s go back to the command-line and kill our grunt server using Ctrl+C. There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be run in one of two ways
+
+1. From the Run menu, select 'Grunt Test' from the drop down list
+2. From the cli, run `grunt test`
+
+When you run `grunt test`, you will see a new browser window open and close, and some warnings in the Yeoman console. Don’t worry, that’s to be expected right now.
+
+Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open `/karma.conf.js` and replace the "files" array with:
+
+    files: [
+      'app/bower_components/jquery/jquery.js',
+      'app/bower_components/jquery-ui/ui/jquery-ui.js',
+      'app/bower_components/angular/angular.js',
+      'app/bower_components/angular-ui/build/angular-ui.js',
+      'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-local-storage/angular-local-storage.js',
+      'app/scripts/*.js',
+      'app/scripts/**/*.js',
+      'test/mock/**/*.js',
+      'test/spec/**/*.js',
+      'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/angular-cookies/angular-cookies.js',
+      'app/bower_components/angular-sanitize/angular-sanitize.js',
+      'app/bower_components/angular-route/angular-route.js'
+    ],
+
+and replace 'Chrome' with 'PhantomHS', too (Codio Boxes will support Chrome shortly, but does not yet)
+
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: ['PhantomJS'],
+
+Or, just replace everything with this ...
+
+    // Karma configuration
+    // http://karma-runner.github.io/0.10/config/configuration-file.html
+
+    module.exports = function(config) {
+      config.set({
+        // base path, that will be used to resolve files and exclude
+        basePath: '',
+
+        // testing framework to use (jasmine/mocha/qunit/...)
+        frameworks: ['jasmine'],
+
+        // list of files / patterns to load in the browser
+        files: [
+          'app/bower_components/jquery/jquery.js',
+          'app/bower_components/jquery-ui/ui/jquery-ui.js',
+          'app/bower_components/angular/angular.js',
+          'app/bower_components/angular-ui/build/angular-ui.js',
+          'app/bower_components/angular-mocks/angular-mocks.js',
+          'app/bower_components/angular-local-storage/angular-local-storage.js',
+          'app/scripts/*.js',
+          'app/scripts/**/*.js',
+          'test/mock/**/*.js',
+          'test/spec/**/*.js',
+          'app/bower_components/angular-resource/angular-resource.js',
+          'app/bower_components/angular-cookies/angular-cookies.js',
+          'app/bower_components/angular-sanitize/angular-sanitize.js',
+          'app/bower_components/angular-route/angular-route.js'
+        ],
+
+        // list of files / patterns to exclude
+        exclude: [],
+
+        // web server port
+        port: 8080,
+
+        // level of logging
+        // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+        logLevel: config.LOG_INFO,
+
+
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatch: false,
+
+
+        // Start these browsers, currently available:
+        // - Chrome
+        // - ChromeCanary
+        // - Firefox
+        // - Opera
+        // - Safari (only Mac)
+        // - PhantomJS
+        // - IE (only Windows)
+        browsers: ['PhantomJS'],
+
+
+        // Continuous Integration mode
+        // if true, it capture browsers, run tests and exit
+        singleRun: false
+      });
+    };
 
 
 
