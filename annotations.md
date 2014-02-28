@@ -45,7 +45,7 @@ Alternatively, if you already know the name of the generator you want to use, th
 @annotation:tour scaffold
 #Use a Generator to scaffold your App
 
-Once a generator has been installed, you will automatically see the scren below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
+Once a generator has been installed, you will automatically see the screen below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
     
 ![install angular](img/yo-install-angular.png)    
 
@@ -94,7 +94,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 - **test** and **karma.conf.js/karma-e2e.conf.js**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
 
 @annotation:tour mods1
-#Modify some files
+#Modify Gruntfile.js
 To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for 'localhost' (somewhere around line 64) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
@@ -111,7 +111,7 @@ Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to mod
 
 
 @annotation:tour mods2
-#Preview your App
+#Setting up the Codio menus
 Codio has the ability to save you lots of time by configuring the 'Run' menu (cli commands) and the 'Preview' menu. 
 
 Click on 'Configure...' as shown in the Run menu below.
@@ -142,9 +142,11 @@ You will now see that the Run and Preview menus have been updated and look like 
 ![run updated](img/run-updated.png)
 
 @annotation:tour preview
-#Running the App
+#Running & Previewing the App
 ##Start Grunt
 Right, we are now ready to get Grunt to serve up our content. From the Run menu, select 'Grunt Serve' (If it appears in the upper panel covering the tutorial, then drag it down to the lower panel). 
+
+![menus done](img/menus-done.png)
 
 This does nothing more than save you the hassle of typing on the command line ...
 
@@ -260,7 +262,7 @@ View the app in the browser again. Type some text in the input field for a new t
 ![preview](img/preview-3.png)
 
 @annotation:tour remove-todo
-#Removing a ToDo
+#Adding a Remove Button
 Let’s now add the ability to remove a todo item. We’ll need to add a new remove button alongside each todo item.
 
 Going back to our view template (app/views/main.html), add a button to the existing `ng-repeat` directive. And to make sure our input field and remove button line up nicely, change the class on the paragraph tag from "form-group" to “input-group”.
@@ -330,6 +332,8 @@ and you'll see something like this ...
 
 @annotation:tour ls-mods1
 #Modifying index.html for Local Storage
+There are now 4 tutorial steps you'll run through to get persistant storage up and running, so don't start previewing just yet!
+
 Modify `app/index.html` to include the new Angular module by add the following after the other Angular script tags:
 
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
@@ -349,6 +353,9 @@ Your `index.html` scripts should now look like this:
 
 @annotation:tour ls-mods2
 #Modifying app/scripts/app.js for Local Storage
+
+**IMPORTANT**: don't modify `main.js` by mistake. I made this mistake a couple of times setting this all up!
+
 Edit the todo module (app/scripts/app.js) to include the `localStorage` adapter:
 
     angular.module('workspaceApp', [
@@ -469,14 +476,16 @@ So to recap, in this section we:
 ##Testing with Karma and Jasmine
 For those unfamiliar with Karma, it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: ngScenario and Jasmine. When we ran yo angular earlier in this Codelab, the generator scaffolded a test directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
 
-Let’s go back to the command-line and kill our grunt server using Ctrl+C. There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be run in one of two ways
+Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu. 
+
+There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
 
 1. From the Run menu, select 'Grunt Test' from the drop down list
 2. From the cli, run `grunt test`
 
 When you run `grunt test`, you will see a new browser window open and close, and some warnings in the Yeoman console. Don’t worry, that’s to be expected right now.
 
-Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open `/karma.conf.js` and replace the "files" array with:
+Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`/karma.conf.js`** and replace the "files" array with:
 
     files: [
       'app/bower_components/jquery/jquery.js',
@@ -571,7 +580,42 @@ Or, just replace everything with this ...
     };
 
 
+@annotation:tour test-mods
+#Modify test main.js
+Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
 
+Delete the following:
 
+    it('should attach a list of awesomeThings to the scope', function () {
+      expect(scope.awesomeThings.length).toBe(3);
+    });
 
+And replace that test with the following:
+
+    it('should have no items to start', function () {
+        expect(scope.todos.length).toBe(0);
+    });
+
+Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. We're not using `jquery-ui` or `angular-ui`.
+
+You should see something like this ...
+
+![test run](img/test-run.png)
+
+Fantastic!
+
+Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
+
+@annotation:tour production-build
+#Building for Production
+![yeoman sitting](img/yeoman-sitting.png)
+
+Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
+
+Amazingly we can achieve all of this just by running Grunt in one of 2 ways
+
+- from the Run menu dropdown, select 'Grunt Build'
+- from the command line, `$ grunt`
+
+This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
 
