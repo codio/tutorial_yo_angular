@@ -1,4 +1,4 @@
-@annotation:tour installation
+@annotation:tour installation 
 #Installing Yeoman
 Let's start off by getting the panels set up in a nice way for the tutorial.
 
@@ -45,12 +45,11 @@ Alternatively, if you already know the name of the generator you want to use, th
 @annotation:tour scaffold
 #Use a Generator to scaffold your App
 
-Once a generator has been installed it can be accessed via the Yeoman interactive menu:
-
-    $ yo
+Once a generator has been installed, you will automatically see the scren below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
     
 ![install angular](img/yo-install-angular.png)    
-    
+
+###Comments
 As you become more familiar with Yo, you might want to run generators directly without the use of the interactive menu:
 
     $ yo angular    
@@ -59,6 +58,10 @@ Some generators will also provide optional settings to customize your app with c
 
 The AngularJS generator provides options to include use Sass (with Compass) and/or Twitter Bootstrap. Enter ‘n’ and ‘y’ respectively to these options.
 
+
+###Keep calm and carry on
+With 'Run the Angular generator' highlighted, press Enter.
+
 ![inputs](img/angular-inputs.png)
 
 Next you are prompted to select what Angular modules you would like to include as well. Angular modules are self-contained JavaScript files with helpful functionality. For example, the ngResource module (angular-resource.js) provides interaction support with RESTful services.
@@ -66,6 +69,13 @@ Next you are prompted to select what Angular modules you would like to include a
 You can deselect options using the spacebar. Let’s roll with the defaults. (So if you have been playing around with the spacebar, make sure that all the modules are marked as green.)
 
 Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait it will be ready.
+
+Don't worry if you see a log error like this
+
+    npm ERR!                                                
+    npm ERR! Additional logging details can be found in:
+    npm ERR!     /home/codio/workspace/npm-debug.log 
+    npm ERR! not ok code 0 
 
 @annotation:tour files
 #Explore the File Tree
@@ -85,23 +95,26 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 
 @annotation:tour mods1
 #Modify some files
-To run properly in Codio, you'll want to open up `Gruntfile.js` and search for 'localhost' (somewhere around line 64) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for 'localhost' (somewhere around line 64) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
-    livereload: 10467
+    livereload: 35729
         
 to this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: '0.0.0.0',
     livereload: 4000    
-    
+
+Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to modify the livereload port. 
 
 
 @annotation:tour mods2
 #Preview your App
-Codio has the ability to save you lots of time by setting up cli and preview menus. Open up the Run menu at the top (see image below) and select 'Configure...'.
+Codio has the ability to save you lots of time by configuring the 'Run' menu (cli commands) and the 'Preview' menu. 
+
+Click on 'Configure...' as shown in the Run menu below.
 
 ![run menu](img/run-menu.png)
 
@@ -137,13 +150,47 @@ This does nothing more than save you the hassle of typing on the command line ..
 
     grunt serve
 
-You should see your terminal window running `grunt serve`. 
+You should see your terminal window running `grunt serve`. If there are any issues running Grunt, just run `npm install` from the terminal to make sure all packages got correctly installed.
 
 ##Preview
 Now, from the Preview menu to the right, select 'Yeoman Demo'. Again, this is just a shortcut to ...
 
     http://{{domain}}:9000/
 
+You should now see the following screen appear in a new browser tab.
 
+![allo allo](img/allo.png)
 
+@annotation:tour livereload
+#Live Reload
+With both `grunt serve` still running in the background and the Preview tab still open, open up the file `app/views/main.html` and change some text somewhere. You will notice that the browser tab auto reloads the content.
 
+@annotation:tour step1
+#Create a new Template to show a ToDo list
+###app/views/main.html
+First, let's modify our view (views/main.html) to output our todos items as text input fields. Copy and paste the following code into the `app/views/main.html` window.
+
+    <div class="container">
+      <h2>My todos</h2>
+      <p class="form-group” ng-repeat="todo in todos">
+        <input type="text" ng-model="todo" class="form-control">
+      </p>
+    </div>
+
+###app/scripts/controllers/main.js
+Now, let's modify the controller script by pasting in this code
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope) {
+        $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+      });
+
+The [ng-repeat](http://docs.angularjs.org/api/ng.directive:ngRepeat) attribute on the paragraph tag is an [Angular directive](http://docs.angularjs.org/guide/directive) that instantiates a template once per item from a collection. In our case, imagine that the paragraph element and its content is turned into a virtual rubber stamp by adding the ng-repeat attribute. For each item in the todos array, Angular will stamp out a new instance of the <p><input></p> HTML.
+
+The [ng-model](http://docs.angularjs.org/api/ng.directive:ngModel) attribute is another Angular directive that works with input, select, textarea and custom controls to create a two-way data binding. In our example, it populates a text input field with the value from the current todo item in the ng-repeat loop.
+
+Your browser should now show something like this
+
+![preview](img/preview-1.png)
