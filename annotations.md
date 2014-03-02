@@ -593,7 +593,7 @@ Delete the following:
 And replace that test with the following:
 
     it('should have no items to start', function () {
-        expect(scope.todos.length).toBe(0);
+      expect(scope.todos.length).toBe(0);
     });
 
 Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. We're not using `jquery-ui` or `angular-ui`.
