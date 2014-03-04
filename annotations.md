@@ -619,3 +619,4 @@ Amazingly we can achieve all of this just by running Grunt in one of 2 ways
 
 This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
 
+
