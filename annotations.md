@@ -5,7 +5,7 @@ It is a really good idea to quickly set up a couple of IDE panels so the tutoria
 Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following
 
 1. View->Panels->Split Vertical
-1. Drag the `(tutorial)` tab from the left panel over to the newly created right hand pane.
+1. Drag the `(tutorial)` tab from the left panel over to the newly created right hand empty tab bar area.
 1. You can close the `README.md` file now
 1. You should now see something like this
 
@@ -57,7 +57,7 @@ Let's install Yeoman. In your terminal window type
 
     npm install -g yo
 
-Now site back and wait. If you were to do this on your laptop on a normal ADSL connection, it would be a LOT slower.
+Now sit back and wait. If you were to do this on your laptop on a normal ADSL connection, it would be a LOT slower.
 
 Once the Yeoman installation is complete, you can check the version that was installed
 
@@ -225,7 +225,7 @@ First, let's modify our view (views/main.html) to output our todos items as text
     </div>
 
 ###app/scripts/controllers/main.js
-Now, let's modify the controller script by repolacing everything with ...
+Now, let's modify the controller script by replacing everything with ...
 
     'use strict';
 
@@ -278,7 +278,7 @@ This adds a form with a submit button to the top of the page. It utilises anothe
 #Making the Add button work
 If you click the Add button currently, nothing will happen - let’s change that.
 
-`ng-submit` binds an angular expression to the onsubmit event of the form. If no action attribute is applied to the form, it also prevents the default browser behaviour. In our example we’ve added an angular expression of ‘addTodo()’.
+`ng-submit` binds an angular expression to the onsubmit event of the form. If no action attribute is applied to the form, it also prevents the default browser behaviour. In our example we’ve added an angular expression of `addTodo()`.
 
 The following `addTodo` function pushes new todo items onto the existing todo items array and then clears the text input field. Let's add the following code inside the existing code
 
@@ -326,9 +326,9 @@ then run your app again, and you should get this ...
 
 ![remove](img/remove-buttons.png)
 
-We introduced a new Angular directive above, [ng-click](http://docs.angularjs.org/api/ng.directive:ngClick). ng-click allows you to specify custom behaviours when an element is clicked. In this instance, we call `removeTodo()` and pass $index to the function.
+We introduced a new Angular directive above, [ng-click](http://docs.angularjs.org/api/ng.directive:ngClick). ng-click allows you to specify custom behaviours when an element is clicked. In this instance, we call `removeTodo()` and pass `$index` to the function.
 
-The value of $index will be the array index of the current todo item within the ng-repeat directive. For example, the first item will have an array index of 0 and removeTodo will be passed the value of 0. Similarly, the last item of a todo list with 5 items will have an array index of 4 and `removeTodo` will be passed a value of 4.
+The value of `$index` will be the array index of the current todo item within the ng-repeat directive. For example, the first item will have an array index of 0 and `removeTodo` will be passed the value of 0. Similarly, the last item of a todo list with 5 items will have an array index of 4 and `removeTodo` will be passed a value of 4.
 
 @annotation:tour
 #Making the remove buttons work
@@ -340,7 +340,7 @@ Let’s now add some logic for removing todo items to our controller. The follow
 
 The complete controller (app/scripts/controllers/main.js) with the new `removeTodo` function is below:
 
-'use strict';
+    'use strict';
 
     angular.module('workspaceApp')
       .controller('MainCtrl', function ($scope) {
@@ -379,7 +379,7 @@ and you'll see something like this ...
 #Modifying index.html for Local Storage
 There are now 4 tutorial steps you'll run through to get persistant storage up and running, so don't start previewing just yet!
 
-Modify `app/index.html` to include the new Angular module by add the following after the other Angular script tags:
+Modify `app/index.html` to include the new Angular module by adding the following after the other Angular script tags:
 
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
     
@@ -427,7 +427,7 @@ Our todo module (app/scripts/app.js) should now look like this:
       'ngSanitize',
       'ngRoute',
       'LocalStorageModule'
-    ])
+    ]);
       .config(['localStorageServiceProvider', function(localStorageServiceProvider){
         localStorageServiceProvider.setPrefix('ls');
       }])
@@ -457,7 +457,7 @@ So now, rather than reading our todos from a static array, we’ll be reading it
 
 We’ll also use the angular [$watch](http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch) listener to watch for changes in the value of `$scope.todos`. If someone adds or removes a todo, it will then keep our `localStorage` todos datastore in sync.
 
-Therefore, we need to remove the current $scope.todos declaration:
+Therefore, we need to remove the current `$scope.todos` declaration:
 
     $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -512,7 +512,7 @@ Pat yourself on the back! You just used Yeoman to build a snazzy todo app in no 
 So to recap, in this section we:
 
 - Scaffolded the boilerplate for an application using `yo`
-- Installed dependencies to improve the functionality in our app with bower
+- Installed dependencies to improve the functionality in our app with `bower`
 - Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
 
 
@@ -660,7 +660,7 @@ Ready to show your beautiful todo app to the world? Let’s try to create a prod
 Amazingly we can achieve all of this just by running Grunt in one of 2 ways
 
 - from the Run menu dropdown, select 'Grunt Build'
-- from the command line, `$ grunt`
+- from the command line, `grunt`
 
 This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
 

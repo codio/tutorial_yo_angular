@@ -2,4 +2,13 @@ node_modules
 dist
 .tmp
 .sass-cache
-app/bower_components
+app
+test
+.bowerrc
+.travis.yml
+bower.json
+Gruntfile.js
+karma-e2e.conf.js
+karma.conf.js
+package.json
+.editorconfig
