@@ -11,15 +11,49 @@ Codio lets you create panels from the View->Panels menu. To get it done really q
 
 ![panels ready](img/panels-created.png)
 
+Use the navigation buttons at the top to move to the next step.
+
+@annotation:tour
+##MEET YEOMAN
+
+![yeoman terminal](img/yeoman-term.png)
+
+Yeoman is a man in a hat with three tools for improving your productivity:
+
+[yo](http://yeoman.io/) is a scaffolding tool that offers an ecosystem of framework-specific scaffolds, called generators, that can be used to perform some of the tedious tasks I mentioned earlier.
+
+[grunt](http://gruntjs.com/) is used to build, preview and test your project, thanks to help from tasks curated by the Yeoman team and [grunt-contrib](https://github.com/gruntjs/grunt-contrib).
+
+[bower](http://bower.io/) is used for dependency management, so that you no longer have to manually download your front-end libraries.
+
+With just a command or two, Yeoman can write boilerplate code for your app (or individual pieces like Models), compile your Sass, and fire up a simple web server in your current directory. It can also run your unit tests, minimize and concatenate your CSS, JS, HTML and images, plus more.
+
+You can install generators using the [npm](http://npmjs.org/) command and there are over [450 generators](http://yeoman.io/community-generators.html) now available, many of which have been written by the open-source community. Popular generators include [generator-angular](https://github.com/yeoman/generator-angular), [generator-backbone](https://github.com/yeoman/generator-backbone) and [generator-ember](https://github.com/yeoman/generator-ember).
+
+##TODAY’S SAMPLE YEOMAN APP: A TODO APP USING ANGULARJS
+
+For those unfamiliar with AngularJS, it is a JavaScript framework for developing dynamic web apps. Angular is what HTML would have been if it had been designed for web apps, instead of static documents. Angular aims to simplify application development by providing high-level features like data-binding and dependency injection (DI).
+
+To dig deeper into the sweet spots of AngularJS, take a look at the detailed [documentation](http://docs.angularjs.org/guide/overview).
+
+Let’s dive right into building the below Todo app from scratch.
+
+![sample app](img/sample-app.png)
 
 @annotation:tour 
-#Installing Yeoman
-Now we're ready to get going with the tutorial proper
-
+#Opening a Terminal window
 1. Click in the left code panel area
 1. Open up a Terminal window to your Codio Box from the 'Tools->Terminal' menu. This should now appear in the left panel. If it's in the right panel, drag the terminal tab across to the left one.
 
-Let's install Yeoman now. In your terminal window type
+Codio should now look like this:
+
+![terminal panels](img/panels-term.png)
+
+@annotation:tour 
+#Installing Yeoman
+Now we're ready to get going with the tutorial proper.
+
+Let's install Yeoman. In your terminal window type
 
     npm install -g yo
 
@@ -29,7 +63,6 @@ Once the Yeoman installation is complete, you can check the version that was ins
 
     yo --version && bower --version && grunt --version
 
-Press the navigation button at the top of this panel to move to the next step.
 
 @annotation:tour
 #Installing Yeoman Generators
