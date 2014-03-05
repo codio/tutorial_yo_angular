@@ -1,13 +1,25 @@
-@annotation:tour installation 
+@annotation:tour
+#IDE Panels
+It is a really good idea to quickly set up a couple of IDE panels so the tutorial is really easy to follow.
+
+Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following
+
+1. View->Panels->Split Vertical
+1. Drag the `(tutorial)` tab from the left panel over to the newly created right hand pane.
+1. You can close the `README.md` file now
+1. You should now see something like this
+
+![panels ready](img/panels-created.png)
+
+
+@annotation:tour 
 #Installing Yeoman
-Let's start off by getting the panels set up in a nice way for the tutorial.
+Now we're ready to get going with the tutorial proper
 
-1. Create a new panel by selecting 'View->Panels->Split horizontal' from the menu
-1. Open up a Terminal window to your Codio Box from the 'Tools->Terminal' menu
-1. Note you can drag the Terminal tab into any other panel
-1. Adjust the vertical splitter to suit your display
+1. Click in the left code panel area
+1. Open up a Terminal window to your Codio Box from the 'Tools->Terminal' menu. This should now appear in the left panel. If it's in the right panel, drag the terminal tab across to the left one.
 
-Let's get started with the real stuff by installing Yeoman. In your terminal window type
+Let's install Yeoman now. In your terminal window type
 
     npm install -g yo
 
@@ -42,7 +54,7 @@ Alternatively, if you already know the name of the generator you want to use, th
     $ npm install -g generator-angular
 
 
-@annotation:tour scaffold
+@annotation:tour
 #Use a Generator to scaffold your App
 
 Once a generator has been installed, you will automatically see the screen below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
@@ -77,7 +89,7 @@ Don't worry if you see a log error like this
     npm ERR!     /home/codio/workspace/npm-debug.log 
     npm ERR! not ok code 0 
 
-@annotation:tour files
+@annotation:tour
 #Explore the File Tree
 In the file tree on the left, take a look at what was actually scaffolded. We have:
 
@@ -93,7 +105,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 - **Gruntfile.js**, **package.json**, and **node_modules**: configuration and dependencies required by our Grunt tasks
 - **test** and **karma.conf.js/karma-e2e.conf.js**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
 
-@annotation:tour mods1
+@annotation:tour
 #Modify Gruntfile.js
 To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for 'localhost' (somewhere around line 64) and change this
 
@@ -110,7 +122,7 @@ to this
 Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to modify the livereload port. 
 
 
-@annotation:tour mods2
+@annotation:tour
 #Setting up the Codio menus
 Codio has the ability to save you lots of time by configuring the 'Run' menu (cli commands) and the 'Preview' menu. 
 
@@ -141,7 +153,7 @@ You will now see that the Run and Preview menus have been updated and look like 
 
 ![run updated](img/run-updated.png)
 
-@annotation:tour preview
+@annotation:tour
 #Running & Previewing the App
 ##Start Grunt
 Right, we are now ready to get Grunt to serve up our content. From the Run menu, select 'Grunt Serve' (If it appears in the upper panel covering the tutorial, then drag it down to the lower panel). 
@@ -163,11 +175,11 @@ You should now see the following screen appear in a new browser tab.
 
 ![allo allo](img/allo.png)
 
-@annotation:tour livereload
+@annotation:tour
 #Live Reload
 With both `grunt serve` still running in the background and the Preview tab still open, open up the file `app/views/main.html` and change some text somewhere. You will notice that the browser tab auto reloads the content.
 
-@annotation:tour step1
+@annotation:tour
 #Create a new Template to show a ToDo list
 ###app/views/main.html
 First, let's modify our view (views/main.html) to output our todos items as text input fields. Copy and paste the following code into the `app/views/main.html` file (replace everything).
@@ -197,7 +209,7 @@ Your browser should now show something like this
 
 ![preview](img/preview-1.png)
 
-@annotation:tour step2
+@annotation:tour
 #Adding a ToDo
 Let’s implement a way to add new todo items to the list of existing todos within the application.
 
@@ -229,7 +241,7 @@ This adds a form with a submit button to the top of the page. It utilises anothe
 
 ![preview](img/preview-2.png)
 
-@annotation:tour step3
+@annotation:tour
 #Making the Add button work
 If you click the Add button currently, nothing will happen - let’s change that.
 
@@ -261,7 +273,7 @@ View the app in the browser again. Type some text in the input field for a new t
 
 ![preview](img/preview-3.png)
 
-@annotation:tour remove-todo
+@annotation:tour
 #Adding a Remove Button
 Let’s now add the ability to remove a todo item. We’ll need to add a new remove button alongside each todo item.
 
@@ -285,7 +297,7 @@ We introduced a new Angular directive above, [ng-click](http://docs.angularjs.or
 
 The value of $index will be the array index of the current todo item within the ng-repeat directive. For example, the first item will have an array index of 0 and removeTodo will be passed the value of 0. Similarly, the last item of a todo list with 5 items will have an array index of 4 and `removeTodo` will be passed a value of 4.
 
-@annotation:tour remove-todo-working
+@annotation:tour
 #Making the remove buttons work
 Let’s now add some logic for removing todo items to our controller. The following `removeTodo` function removes one todo item from the items array using the JavaScript `splice` method at the given `$index` value:
 
@@ -315,7 +327,7 @@ One thing you might notice is that although we’re able to add and remove items
 
 Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
 
-@annotation:tour bower
+@annotation:tour
 #Using Bower to install angular-local-storage
 We can check what packages we have already installed with:
 
@@ -330,7 +342,7 @@ and you'll see something like this ...
 ![bower install output](img/bower-install.png)
 
 
-@annotation:tour ls-mods1
+@annotation:tour
 #Modifying index.html for Local Storage
 There are now 4 tutorial steps you'll run through to get persistant storage up and running, so don't start previewing just yet!
 
@@ -351,7 +363,7 @@ Your `index.html` scripts should now look like this:
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
 
-@annotation:tour ls-mods2
+@annotation:tour
 #Modifying app/scripts/app.js for Local Storage
 
 **IMPORTANT**: don't modify `main.js` by mistake. I made this mistake a couple of times setting this all up!
@@ -397,7 +409,7 @@ Our todo module (app/scripts/app.js) should now look like this:
           });
       });
       
-@annotation:tour ls-mods3
+@annotation:tour
 #Modifying app/scripts/controllers/main.js for Local Storage
 You will also need to update your controller (scripts/controllers/main.js) to declare a dependency on the `localStorage` service. Add `localStorageService` as the second parameter in the callback function.
 
@@ -456,7 +468,7 @@ If you look at your app in the browser now you’ll see that there are no items 
 
 Go ahead and refresh the browser and start adding some items. Then refresh the browser and you'll see everything persisting nicely.
 
-@annotation:tour ls-devtools
+@annotation:tour
 #Checking in Dev Tools
 We can confirm whether our data is being persisted to `localStorage` by checking the Resources panel in Chrome DevTools and selecting "Local Storage" from the lefthand side:
 
@@ -471,7 +483,7 @@ So to recap, in this section we:
 - Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
 
 
-@annotation:tour ready-production
+@annotation:tour
 #Getting Ready for Production
 ##Testing with Karma and Jasmine
 For those unfamiliar with Karma, it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: ngScenario and Jasmine. When we ran yo angular earlier in this Codelab, the generator scaffolded a test directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
@@ -580,7 +592,7 @@ Or, just replace everything with this ...
     };
 
 
-@annotation:tour test-mods
+@annotation:tour
 #Modify test main.js
 Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
 
@@ -606,7 +618,7 @@ Fantastic!
 
 Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
 
-@annotation:tour production-build
+@annotation:tour
 #Building for Production
 ![yeoman sitting](img/yeoman-sitting.png)
 

@@ -7,7 +7,7 @@
 In this code lab, you build a fully functional application using Yeoman and AngularJS. The sample app provides a brief look at some Yeoman, Grunt and Bower features. This code lab assumes that you have some programming experience.
 
 ##RUNNING THE TUTORIAL IN CODIO
-Codio allows you to run everything incredibly fast. Installs are often much quicker than on your laptop and there is very little to setup.
+Running this tutorial in Codio is a great way to learn as you will see. Installs are usually much quicker than on your laptop and you can start work without having to set up a stack. Full instruction are below.
 
 
 ###Video
@@ -18,10 +18,12 @@ If you want the hands on approach then go to the Tools->Tutorial menu option and
 
 ![create codio project](img/create-project.png)
 
+https://github.com/codio/tutorial_yo_angular.git
+
 1. Create an account on Codio and sign in. 
-1. Create a new project as shown above (Empty Project). 
+1. Create a new project as shown above by selecting the Git tab
+1. Paste into the 'Clone a Git repo' field `https://github.com/codio/tutorial_yo_angular.git`
 1. When you press 'Create Project' you will be taken straight into the IDE
-1. In the IDE, delete the `README.md` and `index.html` files
 1. Go to the Tools->Tutorial menu option and simply follow the instructions
 
 ##MEET YEOMAN
