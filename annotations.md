@@ -130,8 +130,10 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
   - **index.html**: the base html file for our Angular app
   - **404.html**, **favicon.ico**, and **robots.txt:** commonly used web files so you don’t have to create them yourself
   - **bower_components**: a home for our JavaScript/web dependencies, installed by Bower
-  - **scripts**: our own JS files
-  - **app.js**: our main application code
+  - **fonts**: fonts used in the package
+  - **images**: images used in the package
+  - **scripts/controllers**: our own JS files
+  - **scripts/app.js**: our main application code
   - **controllers**: our Angular controllers
   - **styles**: our CSS files
   - **views**: a place for our Angular templates
@@ -140,7 +142,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 
 @annotation:tour
 #Modify Gruntfile.js
-To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for 'localhost' (somewhere around line 64) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (somewhere around line 64) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
@@ -152,7 +154,24 @@ to this
     hostname: '0.0.0.0',
     livereload: 4000    
 
-Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to modify the livereload port. 
+Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to modify the livereload port.
+
+Also search for `<%= yeoman.app %>/{,*/}*.html',` (around line 53) to change this:
+
+    files: [
+          '<%= yeoman.app %>/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
+
+to this
+
+    files: [
+          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '.tmp/styles/{,*/}*.css',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
 
 
 @annotation:tour
@@ -198,6 +217,9 @@ This does nothing more than save you the hassle of typing on the command line ..
     grunt serve
 
 You should see your terminal window running `grunt serve`. If there are any issues running Grunt, just run `npm install` from the terminal to make sure all packages got correctly installed.
+
+When Grunt is ready you will see 
+`Waiting...` in the terminal
 
 ##Preview
 Now, from the Preview menu to the right, select 'Yeoman Demo'. Again, this is just a shortcut to ...
@@ -362,6 +384,9 @@ Don’t worry, we’ll fix this later after we learn more about installing packa
 
 @annotation:tour
 #Using Bower to install angular-local-storage
+
+** Close gruntserve/terminal and open new?**
+** where does it say about resarting grunt serve**
 We can check what packages we have already installed with:
 
     $ bower list
@@ -427,7 +452,7 @@ Our todo module (app/scripts/app.js) should now look like this:
       'ngSanitize',
       'ngRoute',
       'LocalStorageModule'
-    ]);
+    ])
       .config(['localStorageServiceProvider', function(localStorageServiceProvider){
         localStorageServiceProvider.setPrefix('ls');
       }])
@@ -521,7 +546,13 @@ So to recap, in this section we:
 ##Testing with Karma and Jasmine
 For those unfamiliar with Karma, it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: ngScenario and Jasmine. When we ran yo angular earlier in this Codelab, the generator scaffolded a test directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
 
-Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu. 
+Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu.
+
+Run `yo` and select `Run the Karma Generator`.
+
+![yo karma](img/yo-karma.png)
+
+When asked to override `karma.conf.js` enter 'y'
 
 There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
 
@@ -624,7 +655,6 @@ Or, just replace everything with this ...
       });
     };
 
-
 @annotation:tour
 #Modify test main.js
 Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
@@ -657,9 +687,9 @@ Writing unit tests make it easier to catch bugs as your app gets bigger and when
 
 Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
 
-Amazingly we can achieve all of this just by running Grunt in one of 2 ways
+Amazingly we can achieve all of this just by runningGrunt in one of 2 ways
 
-- from the Run menu dropdown, select 'Grunt Build'
+- from  the Run menu dropdown, select 'Grunt Build'
 - from the command line, `grunt`
 
 This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
