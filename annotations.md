@@ -385,13 +385,11 @@ Don’t worry, we’ll fix this later after we learn more about installing packa
 @annotation:tour
 #Using Bower to install angular-local-storage
 
-** Close gruntserve/terminal and open new?**
-** where does it say about resarting grunt serve**
 We can check what packages we have already installed with:
 
     $ bower list
 
-To easily achieve persistence, we can use another Angular module called [angular-local-storage](http://gregpike.net/demos/angular-local-storage/demo.html) that will allow us to quickly implement [Local Storage](http://diveintohtml5.info/storage.html). Bower comes to the rescue. Run the following command:
+To easily achieve persistence, we can use another Angular module called [angular-local-storage](http://gregpike.net/demos/angular-local-storage/demo.html) that will allow us to quickly implement [Local Storage](http://diveintohtml5.info/storage.html). Bower comes to the rescue. Run the following command in the terminal:
 
     $ bower install --save angular-local-storage
 
