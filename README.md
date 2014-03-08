@@ -11,7 +11,9 @@ Running this tutorial in Codio is a great way to learn as you will see. Installs
 
 
 ###Video
-If you prefer to sit back and watch, we have prepared a video that explains the Yeoman project
+Here's a [2:30] video that shows you how Codio and the Yeoman tutorial work together. If you like what you see then get going with the Interactive tutorial.
+
+[Clik to start video](https://vimeo.com/88482886) best watched full screen.
 
 ###Interactive Tutorial
 If you want the hands on approach then go to the Tools->Tutorial menu option and simply follow the instructions.
