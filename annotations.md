@@ -101,7 +101,7 @@ As you become more familiar with Yo, you might want to run generators directly w
     
 Some generators will also provide optional settings to customize your app with common developer libraries and speed up the initial setup of your development environment.
 
-The AngularJS generator provides options to include use Sass (with Compass) and/or Twitter Bootstrap. Enter ‘n’ and ‘y’ respectively to these options.
+The AngularJS generator provides options to include use Sass (with Compass) and/or Bootstrap. Enter ‘n’ and ‘y’ respectively to these options.
 
 
 ###Keep calm and carry on
@@ -115,12 +115,14 @@ You can deselect options using the spacebar. Let’s roll with the defaults. (So
 
 Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait it will be ready.
 
-Don't worry if you see a log error like this
+Don't worry if you see a log error like this followed by other errors
 
     npm ERR!                                                
     npm ERR! Additional logging details can be found in:
     npm ERR!     /home/codio/workspace/npm-debug.log 
     npm ERR! not ok code 0 
+
+If you do see these errors, close the terminal window and re open to then run `bower install` and when completed `npm install` 
 
 @annotation:tour
 #Explore the File Tree
@@ -410,7 +412,7 @@ Modify `app/index.html` to include the new Angular module by adding the followin
 
 Your `index.html` scripts should now look like this:
 
-    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -562,7 +564,7 @@ When you run `grunt test`, you will see a new browser window open and close, and
 Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`/karma.conf.js`** and replace the "files" array with:
 
     files: [
-      'app/bower_components/jquery/jquery.js',
+      'app/bower_components/jquery/dist/jquery.js',
       'app/bower_components/jquery-ui/ui/jquery-ui.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-ui/build/angular-ui.js',
@@ -578,7 +580,7 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
       'app/bower_components/angular-route/angular-route.js'
     ],
 
-and replace 'Chrome' with 'PhantomHS', too (Codio Boxes will support Chrome shortly, but does not yet)
+and replace 'Chrome' with 'PhantomJS', too (Codio Boxes will support Chrome shortly, but does not yet)
 
     // Start these browsers, currently available:
     // - Chrome
@@ -605,7 +607,7 @@ Or, just replace everything with this ...
 
         // list of files / patterns to load in the browser
         files: [
-          'app/bower_components/jquery/jquery.js',
+          'app/bower_components/jquery/dist/jquery.js',
           'app/bower_components/jquery-ui/ui/jquery-ui.js',
           'app/bower_components/angular/angular.js',
           'app/bower_components/angular-ui/build/angular-ui.js',
