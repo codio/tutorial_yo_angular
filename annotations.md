@@ -554,6 +554,8 @@ Run `yo` and select `Run the Karma Generator`.
 
 When asked to override `karma.conf.js` enter 'y'
 
+When completed then run `npm install karma-jasmine --save-dev` to install jasmine dependencies that are currently missing from the generator
+
 There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
 
 1. From the Run menu, select 'Grunt Test' from the drop down list
