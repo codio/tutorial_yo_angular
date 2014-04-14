@@ -4,20 +4,21 @@
 
 In this code lab, you build a fully functional application using Yeoman and AngularJS. The sample app provides a brief look at some Yeoman, Grunt and Bower features. 
 
-##IF YOU'VE COME FROM YEOMAN.IO SITE
+Take a look at the image below. You can see the Codio IDE with 
 
-**WARNING** : if you clicked in the yeoman.io site to get here, you will likely not have a Codio account, so you should note the URL of this page or you will not be able to get back to it. To avoid this hassle, sign up and follow the instructions in the next section.
+- the step-by-step tutorial content in the right hand panel 
+- your terminal and code windows on the left
 
-Otherwise, select 'Tools->Tutorial' from the Codio menu.
+So you can work your way through the tutorial really easily without having to switch windows or tabs.
 
-##RUNNING THE TUTORIAL IN CODIO IF YOU HAVE A CODIO ACCOUNT
-The advantage of having a Codio account is you can access your projects easily from the Codio dashboard.
+![example](img/readme.png)
 
-Running this tutorial in Codio is a great way to learn as you will see. The whole setup is much quicker than on your laptop and you can start work without having to set up a stack. Full instruction are below.
+##SETUP
+Getting going is trivial ...
 
 ![create codio project](img/create-project.png)
 
-1. Create an account on Codio and sign in. 
+1. [Create an account on Codio](https://codio.com/p/signup) (you can sign up with GitHub) and sign in. 
 1. Create a new project as shown above by selecting the Git tab
 1. Paste into the 'Clone a Git repo' field `https://github.com/codio/tutorial_yo_angular.git`
 1. When you press 'Create Project' you will be taken straight into the IDE
@@ -25,5 +26,5 @@ Running this tutorial in Codio is a great way to learn as you will see. The whol
 
 
 ###Video
-If you prefer to see how Codio works before you try this out, [here's a very short video](https://vimeo.com/88482886).
+If you'd like to see how Codio and this Codelab tutorial work together, [here's a very short video](https://vimeo.com/88482886).
 
