@@ -6,12 +6,9 @@ In this code lab, you build a fully functional application using Yeoman and Angu
 
 ##IF YOU'VE COME FROM YEOMAN.IO SITE
 
-**WARNING** : if you clicked in the yeoman.io site to get here, you will likely not have a Codio account, so you should note the URL of this page or you will not be able to get back to it. To avoid this hassle, sign up and follow the instructions in the next section.
+**WARNING** : if you clicked in the yeoman.io site to get here, you will likely not have a Codio account, so you should sign up (select the 'Try Now' option). When completed you will be returned to the Codio dashboard and select the app to continue.
 
-Otherwise, select 'Tools->Tutorial' from the Codio menu.
-
-##RUNNING THE TUTORIAL IN CODIO IF YOU HAVE A CODIO ACCOUNT
-The advantage of having a Codio account is you can access your projects easily from the Codio dashboard.
+##RUNNING THE TUTORIAL IN CODIO
 
 Running this tutorial in Codio is a great way to learn as you will see. The whole setup is much quicker than on your laptop and you can start work without having to set up a stack. Full instruction are below.
 
