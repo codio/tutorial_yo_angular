@@ -243,7 +243,7 @@ First, let's modify our view (views/main.html) to output our todos items as text
 
     <div class="container">
       <h2>My todos</h2>
-      <p class="form-group” ng-repeat="todo in todos">
+      <p class="form-group" ng-repeat="todo in todos">
         <input type="text" ng-model="todo" class="form-control">
       </p>
     </div>
