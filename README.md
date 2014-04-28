@@ -2,7 +2,7 @@
 
 **By Addy Osmani, James Cryer & Pearl Chen with Annotation Tutorial by Codio**
 
-In this code lab, you build a fully functional application using Yeoman and AngularJS. The sample app provides a brief look at some Yeoman, Grunt and Bower features. 
+In this code lab, you build a fully functional  web application from scratch with the help of [Yeoman](http://yeoman.io/). You'll also use features from [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/). The sample app will be written in [AngularJS](https://angularjs.org/).
 
 Take a look at the image below. You can see the Codio IDE with 
 

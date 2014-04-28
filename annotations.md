@@ -11,24 +11,30 @@ Codio lets you create panels from the View->Panels menu. To get it done really q
 
 ![panels ready](img/panels-created.png)
 
-Use the navigation buttons at the top to move to the next step.
+Use the navigation buttons at the top to move to the next step. all Ok
 
 @annotation:tour
 ##MEET YEOMAN
 
 ![yeoman terminal](img/yeoman-term.png)
 
-Yeoman is a man in a hat with three tools for improving your productivity:
+Yeoman is a man in a hat with tricks up his sleeve.
 
-[yo](http://yeoman.io/) is a scaffolding tool that offers an ecosystem of framework-specific scaffolds, called generators, that can be used to perform some of the tedious tasks I mentioned earlier.
+With just a command or two, Yeoman can write boilerplate code for your entire web application or individual pieces like Controllers and Models. Yeoman can fire up a preview web server and watch your files for edits in order to live reload changes and compile your Sass. Yeoman can also run your unit tests, minimize and concatenate your code, optimize images, plus more!
+
+Yeoman comes with three tools for improving your productivity:
+
+[yo](http://yeoman.io/) is a scaffolding tool that offers an ecosystem of framework-specific scaffolds, called generators, that can be used to perform some of the tedious tasks mentioned earlier.
 
 [grunt](http://gruntjs.com/) is used to build, preview and test your project, thanks to help from tasks curated by the Yeoman team and [grunt-contrib](https://github.com/gruntjs/grunt-contrib).
 
 [bower](http://bower.io/) is used for dependency management, so that you no longer have to manually download your front-end libraries.
 
-With just a command or two, Yeoman can write boilerplate code for your app (or individual pieces like Models), compile your Sass, and fire up a simple web server in your current directory. It can also run your unit tests, minimize and concatenate your CSS, JS, HTML and images, plus more.
+You can install generators using the [npm](http://npmjs.org/) command and there are over [500 generators](http://yeoman.io/community-generators.html) now available, many of which have been written by the open-source community. Popular generators include [generator-angular](https://github.com/yeoman/generator-angular), [generator-backbone](https://github.com/yeoman/generator-backbone) and [generator-ember](https://github.com/yeoman/generator-ember).
 
-You can install generators using the [npm](http://npmjs.org/) command and there are over [450 generators](http://yeoman.io/community-generators.html) now available, many of which have been written by the open-source community. Popular generators include [generator-angular](https://github.com/yeoman/generator-angular), [generator-backbone](https://github.com/yeoman/generator-backbone) and [generator-ember](https://github.com/yeoman/generator-ember).
+##WHY USE YEOMAN?
+
+With so many great tools available to front-end web developers these days it can sometimes be difficult to understand how they all fit together. Deciding on a workflow that you’re happy with is often a very personal endeavour, but getting started isn’t always easy. Yeoman aims to solve this problem by scaffolding workflows for creating modern webapps, while at the same time mixing in many of the best practices that have evolved within the industry.
 
 ##TODAY’S SAMPLE YEOMAN APP: A TODO APP USING ANGULARJS
 
@@ -36,7 +42,7 @@ For those unfamiliar with AngularJS, it is a JavaScript framework for developing
 
 To dig deeper into the sweet spots of AngularJS, take a look at the detailed [documentation](http://docs.angularjs.org/guide).
 
-Let’s dive right into building the below Todo app from scratch.
+The sample web app you'll build will be a Todo app. You will be able to add todos, delete todos, organize your todos using drag and drop, and save todos offline.
 
 ![sample app](img/sample-app.png)
 
@@ -90,6 +96,8 @@ Alternatively, if you already know the name of the generator you want to use, th
 @annotation:tour
 #Use a Generator to scaffold your App
 
+We've used the word "scaffold" a few times but you might not know what that means. Scaffolding, in the Yeoman sense of the word, means generating files for your web app based on your specific configuration requests. In this step, you'll see how Yeoman can generate files specifically for Angular apps — with options for using other external libraries like SASS and Twitter Bootstrap — with minimal effort.
+
 Once a generator has been installed, you will automatically see the screen below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
     
 ![install angular](img/yo-install-angular.png)    
@@ -135,7 +143,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
   - **fonts**: fonts used in the package
   - **images**: images used in the package
   - **scripts/controllers**: our own JS files
-  - **scripts/app.js**: our main application code
+  - **scripts/app.js**: our main Angular application code
   - **controllers**: our Angular controllers
   - **styles**: our CSS files
   - **views**: a place for our Angular templates
@@ -385,13 +393,154 @@ One thing you might notice is that although we’re able to add and remove items
 Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
 
 @annotation:tour
-#Using Bower to install angular-local-storage
+#Using Bower to install packages
+
+Let’s add some order to our list and make it sortable. For this we’re going to use Bower to install the [AngularUI Sortable](https://github.com/angular-ui/ui-sortable) module, a directive component for AngularJS.
 
 We can check what packages we have already installed with:
 
     $ bower list
+    
+You should see that you already have packages for angular-cookies, angular-resources, angular-route, plus others. 
 
-To easily achieve persistence, we can use another Angular module called [angular-local-storage](http://gregpike.net/demos/angular-local-storage/demo.html) that will allow us to quickly implement [Local Storage](http://diveintohtml5.info/storage.html). Bower comes to the rescue. Run the following command in the terminal:
+#Search for packages
+
+To verify that there are AngularUI packages available, use Bower to search for "angular-ui-sortable":
+
+    $ bower search angular-ui-sortable
+    
+There is one result for "angular-ui-sortable" so let’s install it along with [jQuery UI](http://jqueryui.com/) as we already have jQuery installed. To save you from searching, the package name for jQuery UI is "jquery-ui".
+
+#Install Packages
+
+Use Bower to install both "angular-ui-sortable" and "jquery-ui":
+
+    $ bower install --save angular-ui-sortable
+    $ bower install --save jquery-ui
+    
+The `--save` option updates the **bower.json** file with dependencies on angular-ui-sortable and jquery-ui. This will save you from having to manually add it to *bower.json* yourself.
+
+If you have multiple packages that you want to install, you can do it in one line:
+
+    $ bower install --save angular-ui-sortable jquery-ui
+    
+#Confirm Installation
+
+Take a look at your **app/bower_components** directory just to check that everything is there as expected. You should see folders for "jquery-ui" and "angular-ui-sortable" alongside the previously installed angular packages. If you do not see these new folders immediately, refresh the file tree using the refresh button at the bottom right of the tree
+
+@annotation:tour
+#Make Todos Sortable
+
+References to these newly installed dependencies must be added to our **app/index.html** file. You could manually add the AngularUI Sortable module and jQueryUI script files yourself but Yeoman will automate this for you!
+
+Quit your current command line process by using the Ctrl+C keyboard command in the Terminal or closing the Grunt Serve tab
+
+Then run `grunt serve` again.
+
+You'll see that the script section at the bottom of **app/index.html** has automatically updated to include `jquery-ui/ui/jquery-ui.js` and `angular-ui-sortable/sortable.js`:
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+@annotation:tour
+#Using Sortable Module
+
+**app/scripts/app.js**
+
+IMPORTANT: don't modify `main.js` by mistake. I made this mistake a couple of times setting this all up!
+
+In order to use the Sortable module, we must load it into our application by updating our Angular module definitions in `app/scripts/app.js`. Currently it looks like this:
+
+    'use strict';
+
+    angular.module('workspaceApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ngRoute'
+    ])
+      .config(function ($routeProvider) {
+        $routeProvider
+          .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+          })
+          .otherwise({
+            redirectTo: '/'
+          });
+      });
+
+Add the ui.sortable dependency to the array list in the second paramater. Our complete todo module should now look like this:
+
+    'use strict';
+
+    angular.module('workspaceApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ngRoute',
+      'ui.sortable'
+    ])
+      .config(function ($routeProvider) {
+        $routeProvider
+          .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+          })
+          .otherwise({
+            redirectTo: '/'
+          });
+      });
+      
+**app/views/main.html**      
+
+Finally, we need to add the `ui-sortable` directive as a `div` wrapper around our `ng-repeat` in `app/views/main.html`:
+
+    <!-- Todos list -->
+    <div ui-sortable ng-model="todos">
+      <p class="input-group" ng-repeat="todo in todos">
+      
+Let's also add some inline css in order to show a move cursor so it’s clear that we can move todo items:
+
+    <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
+
+The full todo list markup looks like this now:
+
+    <!-- Todos list -->
+    <div ui-sortable ng-model="todos">
+      <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
+        <input type="text" ng-model="todo" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+        </span>
+      </p>
+    </div>
+    
+Back in the browser, we can now re-order our list by dragging the entries up and down from:
+
+![order1](img/order1.png) 
+
+to:
+
+![order2](img/order2.png)
+
+@annotation:tour
+#Make Todos persistent with Local Storage
+
+Let’s revisit the issue of items not persisting when the browser refreshes.
+
+To easily achieve this, we can use another Angular module called [angular-local-storage](http://gregpike.net/demos/angular-local-storage/demo.html) that will allow us to quickly implement [Local Storage](http://diveintohtml5.info/storage.html). Bower comes to the rescue. Run the following command in the terminal:
 
     $ bower install --save angular-local-storage
 
@@ -401,7 +550,7 @@ and you'll see something like this ...
 
 
 @annotation:tour
-#Modifying index.html for Local Storage
+#Modifying app/index.html for Local Storage
 There are now 4 tutorial steps you'll run through to get persistant storage up and running, so don't start previewing just yet!
 
 Modify `app/index.html` to include the new Angular module by adding the following after the other Angular script tags:
@@ -412,14 +561,20 @@ Modify `app/index.html` to include the new Angular module by adding the followin
 
 Your `index.html` scripts should now look like this:
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
 @annotation:tour
 #Modifying app/scripts/app.js for Local Storage
@@ -433,6 +588,7 @@ Edit the todo module (app/scripts/app.js) to include the `localStorage` adapter:
       'ngResource',
       'ngSanitize',
       'ngRoute',
+      'ui.sortable',
       'LocalStorageModule'
     ])
 
@@ -451,6 +607,7 @@ Our todo module (app/scripts/app.js) should now look like this:
       'ngResource',
       'ngSanitize',
       'ngRoute',
+      'ui.sortable',
       'LocalStorageModule'
     ])
       .config(['localStorageServiceProvider', function(localStorageServiceProvider){
@@ -540,11 +697,9 @@ So to recap, in this section we:
 - Installed dependencies to improve the functionality in our app with `bower`
 - Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
 
-
 @annotation:tour
-#Getting Ready for Production
 ##Testing with Karma and Jasmine
-For those unfamiliar with Karma, it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: ngScenario and Jasmine. When we ran yo angular earlier in this Codelab, the generator scaffolded a test directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
+For those unfamiliar with [Karma](http://karma-runner.github.io/), it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: [ngScenario](https://code.angularjs.org/1.2.16/docs/guide/e2e-testing) and [Jasmine](http://jasmine.github.io/). When we ran `yo angular` earlier in this codelab, the generator scaffolded a **test** directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
 
 Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu.
 
@@ -569,7 +724,7 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
       'app/bower_components/jquery/dist/jquery.js',
       'app/bower_components/jquery-ui/ui/jquery-ui.js',
       'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-ui/build/angular-ui.js',
+      'app/bower_components/angular-ui-sortable/sortable.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-local-storage/angular-local-storage.js',
       'app/scripts/*.js',
@@ -608,11 +763,11 @@ Or, just replace everything with this ...
         frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
-        files: [
+       files: [
           'app/bower_components/jquery/dist/jquery.js',
           'app/bower_components/jquery-ui/ui/jquery-ui.js',
           'app/bower_components/angular/angular.js',
-          'app/bower_components/angular-ui/build/angular-ui.js',
+          'app/bower_components/angular-ui-sortable/sortable.js',
           'app/bower_components/angular-mocks/angular-mocks.js',
           'app/bower_components/angular-local-storage/angular-local-storage.js',
           'app/scripts/*.js',
@@ -673,7 +828,7 @@ And replace that test with the following:
       expect(scope.todos.length).toBe(0);
     });
 
-Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. We're not using `jquery-ui` or `angular-ui`.
+Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. 
 
 You should see something like this ...
 
@@ -683,17 +838,20 @@ Fantastic!
 
 Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
 
+
+
 @annotation:tour
-#Building for Production
+#Get Ready for Production
 ![yeoman sitting](img/yeoman-sitting.png)
 
 Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
 
-Amazingly we can achieve all of this just by runningGrunt in one of 2 ways
+Amazingly we can achieve all of this just by running Grunt in one of 2 ways
 
 - from  the Run menu dropdown, select 'Grunt Build'
 - from the command line, `grunt`
 
 This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
 
+Your lean, production-ready application is now available in a dist folder in the root of your project. These are the files that you can put on your server using FTP or any other deployment methods
 
