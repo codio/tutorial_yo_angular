@@ -130,7 +130,7 @@ Don't worry if you see a log error like this followed by other errors
     npm ERR!     /home/codio/workspace/npm-debug.log 
     npm ERR! not ok code 0 
 
-If you do see these errors, close the terminal window and re open to then run `bower install` and when completed `npm install` 
+If you do see these errors, close the terminal window and re open to then run `bower install`.
 
 @annotation:tour
 #Explore the File Tree
@@ -148,7 +148,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
   - **styles**: our CSS files
   - **views**: a place for our Angular templates
 - **Gruntfile.js**, **package.json**, and **node_modules**: configuration and dependencies required by our Grunt tasks
-- **test** and **karma.conf.js/karma-e2e.conf.js**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
+- **test**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
 
 @annotation:tour
 #Modify Gruntfile.js
@@ -447,6 +447,8 @@ You'll see that the script section at the bottom of **app/index.html** has autom
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/angular-ui-sortable/sortable.js"></script>
@@ -464,33 +466,58 @@ In order to use the Sortable module, we must load it into our application by upd
 
     'use strict';
 
-    angular.module('workspaceApp', [
-      'ngCookies',
-      'ngResource',
-      'ngSanitize',
-      'ngRoute'
-    ])
+    /**
+     * @ngdoc overview
+     * @name workspaceApp
+     * @description
+     * # workspaceApp
+     *
+     * Main module of the application.
+     */
+    angular
+      .module('workspaceApp', [
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch'
+      ])
       .config(function ($routeProvider) {
         $routeProvider
           .when('/', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
           })
+          .when('/about', {
+            templateUrl: 'views/about.html',
+            controller: 'AboutCtrl'
+          })
           .otherwise({
             redirectTo: '/'
           });
       });
 
+
 Add the ui.sortable dependency to the array list in the second paramater. Our complete todo module should now look like this:
 
     'use strict';
-
+	/**
+     * @ngdoc overview
+     * @name workspaceApp
+     * @description
+     * # workspaceApp
+     *
+     * Main module of the application.
+     */
     angular.module('workspaceApp', [
-      'ngCookies',
-      'ngResource',
-      'ngSanitize',
-      'ngRoute',
-      'ui.sortable'
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
+        'ui.sortable'
     ])
       .config(function ($routeProvider) {
         $routeProvider
@@ -563,12 +590,14 @@ Your `index.html` scripts should now look like this:
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/angular-ui-sortable/sortable.js"></script>
@@ -584,12 +613,14 @@ Your `index.html` scripts should now look like this:
 Edit the todo module (app/scripts/app.js) to include the `localStorage` adapter:
 
     angular.module('workspaceApp', [
-      'ngCookies',
-      'ngResource',
-      'ngSanitize',
-      'ngRoute',
-      'ui.sortable',
-      'LocalStorageModule'
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
+        'ui.sortable',
+        'LocalStorageModule'
     ])
 
 While you’re in `app.js`, also configure `localStorageServiceProvider` to use ‘todo’ as a `localStorage` name prefix so your app doesn’t accidently read todos from another app using the same variable names:
@@ -602,14 +633,26 @@ Our todo module (app/scripts/app.js) should now look like this:
 
     'use strict';
 
-    angular.module('workspaceApp', [
-      'ngCookies',
-      'ngResource',
-      'ngSanitize',
-      'ngRoute',
-      'ui.sortable',
-      'LocalStorageModule'
-    ])
+    /**
+     * @ngdoc overview
+     * @name workspaceApp
+     * @description
+     * # workspaceApp
+     *
+     * Main module of the application.
+     */
+    angular
+      .module('workspaceApp', [
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
+        'ui.sortable',
+        'LocalStorageModule'
+        
+   		])
       .config(['localStorageServiceProvider', function(localStorageServiceProvider){
         localStorageServiceProvider.setPrefix('ls');
       }])
@@ -709,8 +752,6 @@ Run `yo` and select `Run the Karma Generator`.
 
 When asked to override `karma.conf.js` enter 'y'
 
-When completed then run `npm install karma-jasmine karma-phantomjs-launcher --save-dev ` to install jasmine and phantomJS dependencies that are currently missing from the generator
-
 There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
 
 1. From the Run menu, select 'Grunt Test' from the drop down list
@@ -718,26 +759,70 @@ There is already a grunt task scaffolded out in our `Gruntfile.js` for running t
 
 When you run `grunt test`, you will see a new browser window open and close, and some warnings in the Yeoman console. Don’t worry, that’s to be expected right now.
 
-Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`/karma.conf.js`** and replace the "files" array with:
+Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`test/karma.conf.js`** and replace the empty "files" array with:
 
     files: [
-      'app/bower_components/jquery/dist/jquery.js',
-      'app/bower_components/jquery-ui/ui/jquery-ui.js',
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-ui-sortable/sortable.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/bower_components/angular-local-storage/angular-local-storage.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js',
-      'app/bower_components/angular-resource/angular-resource.js',
-      'app/bower_components/angular-cookies/angular-cookies.js',
-      'app/bower_components/angular-sanitize/angular-sanitize.js',
-      'app/bower_components/angular-route/angular-route.js'
-    ],
+        'app/bower_components/angular/angular.js',  
+        'app/bower_components/angular-animate/angular-animate.js'
+        'app/bower_components/angular-cookies/angular-cookies.js',
+        'app/bower_components/angular-local-storage/angular-local-storage.js',
+        'app/bower_components/angular-mocks/angular-mocks.js',
+        'app/bower_components/angular-resource/angular-resource.js',
+        'app/bower_components/angular-route/angular-route.js',
+        'app/bower_components/angular-sanitize/angular-sanitize.js',
+        'app/bower_components/angular-scenario/angular-scenario.js',
+        'app/bower_components/angular-touch/angular-touch.js',
+        'app/bower_components/angular-ui-sortable/sortable.js',
+        'app/bower_components/jquery/dist/jquery.js',
+        'app/bower_components/jquery-ui/ui/jquery-ui.js',
+        'app/scripts/*.js',
+        'app/scripts/**/*.js',
+        'test/spec/**/*.js'
+     ],
 
-and replace 'Chrome' with 'PhantomJS', too (Codio Boxes will support Chrome shortly, but does not yet)
+Or, just replace everything with this ...
+
+    // Karma configuration
+    // http://karma-runner.github.io/0.12/config/configuration-file.html
+    // Generated on 2014-06-06 using
+    // generator-karma 0.8.2
+
+    module.exports = function(config) {
+      config.set({
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+
+    // base path, that will be used to resolve files and exclude
+    basePath: '',
+
+    // testing framework to use (jasmine/mocha/qunit/...)
+    frameworks: ['jasmine'],
+
+    // list of files / patterns to load in the browser
+    files: [
+        'app/bower_components/angular/angular.js',  
+        'app/bower_components/angular-animate/angular-animate.js'
+        'app/bower_components/angular-cookies/angular-cookies.js',
+        'app/bower_components/angular-local-storage/angular-local-storage.js',
+        'app/bower_components/angular-mocks/angular-mocks.js',
+        'app/bower_components/angular-resource/angular-resource.js',
+        'app/bower_components/angular-route/angular-route.js',
+        'app/bower_components/angular-sanitize/angular-sanitize.js',
+        'app/bower_components/angular-scenario/angular-scenario.js',
+        'app/bower_components/angular-touch/angular-touch.js',
+        'app/bower_components/angular-ui-sortable/sortable.js',
+        'app/bower_components/jquery/dist/jquery.js',
+        'app/bower_components/jquery-ui/ui/jquery-ui.js',
+        'app/scripts/*.js',
+        'app/scripts/**/*.js',
+        'test/spec/**/*.js'
+     ],
+
+    // list of files / patterns to exclude
+    exclude: [],
+
+    // web server port
+    port: 8080,
 
     // Start these browsers, currently available:
     // - Chrome
@@ -747,70 +832,35 @@ and replace 'Chrome' with 'PhantomJS', too (Codio Boxes will support Chrome shor
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: [
+      'PhantomJS'
+    ],
 
-Or, just replace everything with this ...
+    // Which plugins to enable
+    plugins: [
+      'karma-phantomjs-launcher',
+      'karma-jasmine'
+    ],
 
-    // Karma configuration
-    // http://karma-runner.github.io/0.10/config/configuration-file.html
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: false,
 
-    module.exports = function(config) {
-      config.set({
-        // base path, that will be used to resolve files and exclude
-        basePath: '',
+    colors: true,
 
-        // testing framework to use (jasmine/mocha/qunit/...)
-        frameworks: ['jasmine'],
+    // level of logging
+    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
-        // list of files / patterns to load in the browser
-       files: [
-          'app/bower_components/jquery/dist/jquery.js',
-          'app/bower_components/jquery-ui/ui/jquery-ui.js',
-          'app/bower_components/angular/angular.js',
-          'app/bower_components/angular-ui-sortable/sortable.js',
-          'app/bower_components/angular-mocks/angular-mocks.js',
-          'app/bower_components/angular-local-storage/angular-local-storage.js',
-          'app/scripts/*.js',
-          'app/scripts/**/*.js',
-          'test/mock/**/*.js',
-          'test/spec/**/*.js',
-          'app/bower_components/angular-resource/angular-resource.js',
-          'app/bower_components/angular-cookies/angular-cookies.js',
-          'app/bower_components/angular-sanitize/angular-sanitize.js',
-          'app/bower_components/angular-route/angular-route.js'
-        ],
-
-        // list of files / patterns to exclude
-        exclude: [],
-
-        // web server port
-        port: 8080,
-
-        // level of logging
-        // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: config.LOG_INFO,
-
-
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
-
-
-        // Start these browsers, currently available:
-        // - Chrome
-        // - ChromeCanary
-        // - Firefox
-        // - Opera
-        // - Safari (only Mac)
-        // - PhantomJS
-        // - IE (only Windows)
-        browsers: ['PhantomJS'],
-
-
-        // Continuous Integration mode
-        // if true, it capture browsers, run tests and exit
-        singleRun: false
+    // Uncomment the following lines if you are using grunt's server to run the tests
+    // proxies: {
+    //   '/': 'http://localhost:9000/'
+    // },
+    // URL root prevent conflicts with the site root
+    // urlRoot: '_karma_'
       });
     };
+
 
 @annotation:tour
 #Modify test main.js
