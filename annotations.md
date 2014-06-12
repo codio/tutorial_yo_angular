@@ -763,7 +763,7 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 
     files: [
         'bower_components/angular/angular.js',  
-        'bower_components/angular-animate/angular-animate.js'
+        'bower_components/angular-animate/angular-animate.js',
         'bower_components/angular-cookies/angular-cookies.js',
         'bower_components/angular-local-storage/angular-local-storage.js',
         'bower_components/angular-mocks/angular-mocks.js',
@@ -801,7 +801,7 @@ Or, just replace everything with this ...
     // list of files / patterns to load in the browser
     files: [
         'bower_components/angular/angular.js',  
-        'bower_components/angular-animate/angular-animate.js'
+        'bower_components/angular-animate/angular-animate.js',
         'bower_components/angular-cookies/angular-cookies.js',
         'bower_components/angular-local-storage/angular-local-storage.js',
         'bower_components/angular-mocks/angular-mocks.js',
