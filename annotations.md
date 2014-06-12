@@ -139,14 +139,14 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 - **app**: a parent directory for our web application
   - **index.html**: the base html file for our Angular app
   - **404.html**, **favicon.ico**, and **robots.txt:** commonly used web files so you don’t have to create them yourself
-  - **bower_components**: a home for our JavaScript/web dependencies, installed by Bower
   - **fonts**: fonts used in the package
   - **images**: images used in the package
-  - **scripts/controllers**: our own JS files
+  - **scripts**: our own JS files
   - **scripts/app.js**: our main Angular application code
-  - **controllers**: our Angular controllers
+  - **scripts/controllers**: our Angular controllers
   - **styles**: our CSS files
   - **views**: a place for our Angular templates
+- **bower_components**: a home for our JavaScript/web dependencies, installed by Bower
 - **Gruntfile.js**, **package.json**, and **node_modules**: configuration and dependencies required by our Grunt tasks
 - **test**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
 
@@ -426,7 +426,7 @@ If you have multiple packages that you want to install, you can do it in one lin
     
 #Confirm Installation
 
-Take a look at your **app/bower_components** directory just to check that everything is there as expected. You should see folders for "jquery-ui" and "angular-ui-sortable" alongside the previously installed angular packages. If you do not see these new folders immediately, refresh the file tree using the refresh button at the bottom right of the tree
+Take a look at your **bower_components** directory just to check that everything is there as expected. You should see folders for "jquery-ui" and "angular-ui-sortable" alongside the previously installed angular packages. If you do not see these new folders immediately, refresh the file tree using the refresh button at the bottom right of the tree
 
 @annotation:tour
 #Make Todos Sortable
@@ -762,19 +762,19 @@ When you run `grunt test`, you will see a new browser window open and close, and
 Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`test/karma.conf.js`** and replace the empty "files" array with:
 
     files: [
-        'app/bower_components/angular/angular.js',  
-        'app/bower_components/angular-animate/angular-animate.js'
-        'app/bower_components/angular-cookies/angular-cookies.js',
-        'app/bower_components/angular-local-storage/angular-local-storage.js',
-        'app/bower_components/angular-mocks/angular-mocks.js',
-        'app/bower_components/angular-resource/angular-resource.js',
-        'app/bower_components/angular-route/angular-route.js',
-        'app/bower_components/angular-sanitize/angular-sanitize.js',
-        'app/bower_components/angular-scenario/angular-scenario.js',
-        'app/bower_components/angular-touch/angular-touch.js',
-        'app/bower_components/angular-ui-sortable/sortable.js',
-        'app/bower_components/jquery/dist/jquery.js',
-        'app/bower_components/jquery-ui/ui/jquery-ui.js',
+        'bower_components/angular/angular.js',  
+        'bower_components/angular-animate/angular-animate.js'
+        'bower_components/angular-cookies/angular-cookies.js',
+        'bower_components/angular-local-storage/angular-local-storage.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/angular-resource/angular-resource.js',
+        'bower_components/angular-route/angular-route.js',
+        'bower_components/angular-sanitize/angular-sanitize.js',
+        'bower_components/angular-scenario/angular-scenario.js',
+        'bower_components/angular-touch/angular-touch.js',
+        'bower_components/angular-ui-sortable/sortable.js',
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/jquery-ui/ui/jquery-ui.js',
         'app/scripts/*.js',
         'app/scripts/**/*.js',
         'test/spec/**/*.js'
@@ -800,19 +800,19 @@ Or, just replace everything with this ...
 
     // list of files / patterns to load in the browser
     files: [
-        'app/bower_components/angular/angular.js',  
-        'app/bower_components/angular-animate/angular-animate.js'
-        'app/bower_components/angular-cookies/angular-cookies.js',
-        'app/bower_components/angular-local-storage/angular-local-storage.js',
-        'app/bower_components/angular-mocks/angular-mocks.js',
-        'app/bower_components/angular-resource/angular-resource.js',
-        'app/bower_components/angular-route/angular-route.js',
-        'app/bower_components/angular-sanitize/angular-sanitize.js',
-        'app/bower_components/angular-scenario/angular-scenario.js',
-        'app/bower_components/angular-touch/angular-touch.js',
-        'app/bower_components/angular-ui-sortable/sortable.js',
-        'app/bower_components/jquery/dist/jquery.js',
-        'app/bower_components/jquery-ui/ui/jquery-ui.js',
+        'bower_components/angular/angular.js',  
+        'bower_components/angular-animate/angular-animate.js'
+        'bower_components/angular-cookies/angular-cookies.js',
+        'bower_components/angular-local-storage/angular-local-storage.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/angular-resource/angular-resource.js',
+        'bower_components/angular-route/angular-route.js',
+        'bower_components/angular-sanitize/angular-sanitize.js',
+        'bower_components/angular-scenario/angular-scenario.js',
+        'bower_components/angular-touch/angular-touch.js',
+        'bower_components/angular-ui-sortable/sortable.js',
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/jquery-ui/ui/jquery-ui.js',
         'app/scripts/*.js',
         'app/scripts/**/*.js',
         'test/spec/**/*.js'
