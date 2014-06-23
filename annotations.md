@@ -74,23 +74,16 @@ Once the Yeoman installation is complete, you can check the version that was ins
 #Installing Yeoman Generators
 In a traditional web development workflow, you would need to spend a lot of time setting up boilerplate code for your webapp, downloading dependencies, and manually creating your web folder structure. Yeoman generators to the rescue! Generators do the hard work for you by scaffolding out your project. Let’s install a generator for creating AngularJS projects.
 
-Yeoman comes with a handy interactive menu, to access this menu run:
+#Install an AngularJS generator
 
-    $ yo
+You can install Yeoman generators using the [npm](http://npmjs.org/) command and there are over [500 generators](http://yeoman.io/community-generators.html) now available, many of which have been written by the open-source community.
 
-![run yeoman](img/yo.png)
+Install [generator-angular](https://www.npmjs.org/package/generator-angular) using this command:
 
-Use your keyboard’s up / down arrow keys to navigate the menu and hit enter when ‘Install a generator’ is highlighted.
+	npm install --global generator-angular@0.9.1
+    
+This will start to install the Node packages required for the generator. Using `@0.9.1` will request a specific version of the generator.
 
-Next we need to search for a generator to install. A search for `angular` will find many generators contributed by various members of the Yeoman open source community. In this instance we want to install the ‘generator-angular’ generator.
-
-![angular generator](img/yo-angular.png)
-
-With generator-angular selected, hit enter to start installing the generator. This will start to install the Node packages required for the generator.
-
-Alternatively, if you already know the name of the generator you want to use, the generator can be installed using npm as follows:
-
-    $ npm install -g generator-angular
 
 
 @annotation:tour
@@ -443,6 +436,7 @@ You'll see that the script section at the bottom of **app/index.html** has autom
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -563,6 +557,112 @@ to:
 ![order2](img/order2.png)
 
 @annotation:tour
+##Testing with Karma and Jasmine
+For those unfamiliar with [Karma](http://karma-runner.github.io/), it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: [ngScenario](https://code.angularjs.org/1.2.16/docs/guide/e2e-testing) and [Jasmine](http://jasmine.github.io/). When we ran `yo angular` earlier in this codelab, the generator scaffolded a **test** directory in the root folder, created a `karma.conf.js` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
+
+Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu.
+
+There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
+
+1. From the Run menu, select 'Grunt Test' from the drop down list
+2. From the cli, run `grunt test`
+
+When you run `grunt test`, you will see some warnings in the Yeoman console. Don’t worry, that’s to be expected right now.
+
+Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`test/karma.conf.js`** and replace the "files" array with:
+
+    files: [
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery-ui/ui/jquery-ui.js',
+      'bower_components/angular-ui-sortable/sortable.js',
+      'app/scripts/**/*.js',
+      'test/spec/**/*.js'
+    ],
+
+
+
+@annotation:tour
+#Modify test main.js
+Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
+
+Delete the following:
+
+    it('should attach a list of awesomeThings to the scope', function () {
+      expect(scope.awesomeThings.length).toBe(3);
+    });
+
+And replace that test with the following:
+
+    it('should have no items to start', function () {
+      expect(scope.todos.length).toBe(0);
+    });
+
+#Open scripts/controllers/main.js.
+Remove the 3 items we added earlier from the $scope.todos declaration:
+
+`$scope.todos = [];`
+
+The complete controller (app/scripts/controllers/main.js) should now look like
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope) {
+        $scope.todos = [];
+        $scope.addTodo = function () {
+          $scope.todos.push($scope.todo);
+          $scope.todo = '';
+        };
+        $scope.removeTodo = function (index) {
+          $scope.todos.splice(index, 1);
+        };
+      });
+
+Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. 
+
+You should see something like this ...
+
+![test run](img/test-run.png)
+
+Fantastic!
+
+Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
+
+
+
+@annotation:tour
+#Get Ready for Production
+![yeoman sitting](img/yeoman-sitting.png)
+
+Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
+
+Amazingly we can achieve all of this just by running Grunt in one of 2 ways
+
+- from  the Run menu dropdown, select 'Grunt Build'
+- from the command line, `grunt`
+
+This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
+
+Your lean, production-ready application is now available in a dist folder in the root of your project. These are the files that you can put on your server using FTP or any other deployment methods
+
+#Build and preview the production-ready app
+
+Want to preview your production app locally? That’s just another simple grunt command:
+
+- from  the Run menu dropdown, select 'Grunt Serve:Dist'
+- from the command line, `grunt serve:dist`
+
+It will build your project and launch a local web server. Yo Hero!
+
+@annotation:tour
 #Make Todos persistent with Local Storage
 
 Let’s revisit the issue of items not persisting when the browser refreshes.
@@ -592,6 +692,7 @@ Your `index.html` scripts should now look like this:
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -739,169 +840,4 @@ So to recap, in this section we:
 - Scaffolded the boilerplate for an application using `yo`
 - Installed dependencies to improve the functionality in our app with `bower`
 - Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
-
-@annotation:tour
-##Testing with Karma and Jasmine
-For those unfamiliar with [Karma](http://karma-runner.github.io/), it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: [ngScenario](https://code.angularjs.org/1.2.16/docs/guide/e2e-testing) and [Jasmine](http://jasmine.github.io/). When we ran `yo angular` earlier in this codelab, the generator scaffolded a **test** directory in the root folder, created a `karma.conf` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
-
-Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu.
-
-Run `yo` and select `Run the Karma Generator`.
-
-![yo karma](img/yo-karma.png)
-
-When asked to override `karma.conf.js` enter 'y'
-
-There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
-
-1. From the Run menu, select 'Grunt Test' from the drop down list
-2. From the cli, run `grunt test`
-
-When you run `grunt test`, you will see a new browser window open and close, and some warnings in the Yeoman console. Don’t worry, that’s to be expected right now.
-
-Our tests are currently failing as we haven’t updated the boilerplate test which still references `awesomeThings`. We also need to update the Karma configuration to load the the new Bower components into the browser. Open **`test/karma.conf.js`** and replace the empty "files" array with:
-
-    files: [
-        'bower_components/angular/angular.js',  
-        'bower_components/angular-animate/angular-animate.js',
-        'bower_components/angular-cookies/angular-cookies.js',
-        'bower_components/angular-local-storage/angular-local-storage.js',
-        'bower_components/angular-mocks/angular-mocks.js',
-        'bower_components/angular-resource/angular-resource.js',
-        'bower_components/angular-route/angular-route.js',
-        'bower_components/angular-sanitize/angular-sanitize.js',
-        'bower_components/angular-scenario/angular-scenario.js',
-        'bower_components/angular-touch/angular-touch.js',
-        'bower_components/angular-ui-sortable/sortable.js',
-        'bower_components/jquery/dist/jquery.js',
-        'bower_components/jquery-ui/ui/jquery-ui.js',
-        'app/scripts/*.js',
-        'app/scripts/**/*.js',
-        'test/spec/**/*.js'
-     ],
-
-Or, just replace everything with this ...
-
-    // Karma configuration
-    // http://karma-runner.github.io/0.12/config/configuration-file.html
-    // Generated on 2014-06-06 using
-    // generator-karma 0.8.2
-
-    module.exports = function(config) {
-      config.set({
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-    // base path, that will be used to resolve files and exclude
-    basePath: '',
-
-    // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
-
-    // list of files / patterns to load in the browser
-    files: [
-        'bower_components/angular/angular.js',  
-        'bower_components/angular-animate/angular-animate.js',
-        'bower_components/angular-cookies/angular-cookies.js',
-        'bower_components/angular-local-storage/angular-local-storage.js',
-        'bower_components/angular-mocks/angular-mocks.js',
-        'bower_components/angular-resource/angular-resource.js',
-        'bower_components/angular-route/angular-route.js',
-        'bower_components/angular-sanitize/angular-sanitize.js',
-        'bower_components/angular-scenario/angular-scenario.js',
-        'bower_components/angular-touch/angular-touch.js',
-        'bower_components/angular-ui-sortable/sortable.js',
-        'bower_components/jquery/dist/jquery.js',
-        'bower_components/jquery-ui/ui/jquery-ui.js',
-        'app/scripts/*.js',
-        'app/scripts/**/*.js',
-        'test/spec/**/*.js'
-     ],
-
-    // list of files / patterns to exclude
-    exclude: [],
-
-    // web server port
-    port: 8080,
-
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
-    browsers: [
-      'PhantomJS'
-    ],
-
-    // Which plugins to enable
-    plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine'
-    ],
-
-    // Continuous Integration mode
-    // if true, it capture browsers, run tests and exit
-    singleRun: false,
-
-    colors: true,
-
-    // level of logging
-    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-    // Uncomment the following lines if you are using grunt's server to run the tests
-    // proxies: {
-    //   '/': 'http://localhost:9000/'
-    // },
-    // URL root prevent conflicts with the site root
-    // urlRoot: '_karma_'
-      });
-    };
-
-
-@annotation:tour
-#Modify test main.js
-Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
-
-Delete the following:
-
-    it('should attach a list of awesomeThings to the scope', function () {
-      expect(scope.awesomeThings.length).toBe(3);
-    });
-
-And replace that test with the following:
-
-    it('should have no items to start', function () {
-      expect(scope.todos.length).toBe(0);
-    });
-
-Re-running our tests with grunt test should see our tests passing. Don't worry about the warnings. 
-
-You should see something like this ...
-
-![test run](img/test-run.png)
-
-Fantastic!
-
-Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
-
-
-
-@annotation:tour
-#Get Ready for Production
-![yeoman sitting](img/yeoman-sitting.png)
-
-Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
-
-Amazingly we can achieve all of this just by running Grunt in one of 2 ways
-
-- from  the Run menu dropdown, select 'Grunt Build'
-- from the command line, `grunt`
-
-This command will go through the Grunt tasks and configuration Yeoman has set up for you and create a version of your app we can ship. Give it a minute and you should be presented with a completed build and a report of how long the build took to complete and where time was spent:
-
-Your lean, production-ready application is now available in a dist folder in the root of your project. These are the files that you can put on your server using FTP or any other deployment methods
 
