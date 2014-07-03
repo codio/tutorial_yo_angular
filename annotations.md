@@ -2,7 +2,7 @@
 #IDE Panels
 It is a really good idea to quickly set up a couple of IDE panels so the tutorial is really easy to follow.
 
-Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following
+Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following:
 
 1. View->Panels->Split Vertical
 1. Drag the `(tutorial)` tab from the left panel over to the newly created right hand empty tab bar area.
@@ -11,7 +11,7 @@ Codio lets you create panels from the View->Panels menu. To get it done really q
 
 ![panels ready](img/panels-created.png)
 
-Use the navigation buttons at the top to move to the next step. all Ok
+Use the navigation buttons at the top to move to the next step. 
 
 @annotation:tour
 ##MEET YEOMAN
