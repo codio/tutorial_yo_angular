@@ -2,18 +2,15 @@
 title: IDE Panels
 files: []
 editable: false
-layout: ""
+layout: 2-panels-tree
 
 ---
 #IDE Panels
 It is a really good idea to quickly set up a couple of IDE panels so the tutorial is really easy to follow.
 
-Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following:
+We have set up this Guide for 2 panels.
 
-1. View->Panels->Split Vertical
-1. Drag this tab from the left panel over to the newly created right hand empty tab bar area
-1. You can close the `README.md` file now
-1. You should now see something like this
+You should now see something like this
 
 ![panels ready](.guides/img/panels-created.png)
 
@@ -21,7 +18,7 @@ Use the next button at the top to move to the next step.
 ---
 title: MEET YEOMAN
 files: []
-editable: true
+editable: false
 layout: ""
 
 ---
@@ -59,7 +56,7 @@ The sample web app you'll build will be a Todo app. You will be able to add todo
 ---
 title: Opening a Terminal window
 files: []
-editable: true
+editable: false
 layout: ""
 
 ---
@@ -74,7 +71,7 @@ Codio should now look like this:
 ---
 title: Installing Yeoman Generators
 files: []
-editable: true
+editable: false
 layout: ""
 
 ---
@@ -161,8 +158,12 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 
 ---
 title: Modify Gruntfile.js
-files: []
-editable: false
+files:
+  - path: Gruntfile.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -267,8 +268,12 @@ You should now see the following screen appear in a new browser tab.
 
 ---
 title: Live Reload
-files: []
-editable: false
+files:
+  - path: app/views/main.html
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -276,8 +281,12 @@ layout: ""
 With both `grunt serve` still running in the background and the Preview tab still open, open up the file `app/views/main.html` and change some text somewhere. You will notice that the browser tab auto reloads the content.
 ---
 title: Create a new Template to show a ToDo list
-files: []
-editable: false
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -524,8 +533,12 @@ You'll see that the script section at the bottom of **app/index.html** has autom
     <!-- endbuild -->
 ---
 title: Using Sortable Module
-files: []
-editable: false
+files:
+  - path: app/scripts/app.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -636,7 +649,11 @@ to:
 ![order2](.guides/img/order2.png)
 ---
 title: Testing with Karma and Jasmine
-files: []
+files:
+  - path: test/karma.conf.js
+    panel: 0
+    ref: ""
+    lineCount: 0
 editable: false
 layout: ""
 
@@ -673,8 +690,16 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 
 ---
 title: Modify test main.js
-files: []
-editable: false
+files:
+  - path: test/spec/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -808,8 +833,12 @@ Your `index.html` scripts should now look like this:
     <!-- endbuild -->
 ---
 title: Modifying app/scripts/app.js for Local Storage
-files: []
-editable: false
+files:
+  - path: app/scripts/app.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -875,8 +904,12 @@ Our todo module (app/scripts/app.js) should now look like this:
       });
 ---
 title: Modifying app/scripts/controllers/main.js for Local Storage
-files: []
-editable: false
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
