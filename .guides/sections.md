@@ -1,7 +1,7 @@
 ---
 title: IDE Panels
 files: []
-editable: true
+editable: false
 layout: ""
 
 ---
@@ -161,11 +161,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 
 ---
 title: Modify Gruntfile.js
-files:
-  - path: Gruntfile.js
-    panel: 1
-    ref: "hostname: 'localhost',"
-    lineCount: 2
+files: []
 editable: false
 layout: ""
 
@@ -271,11 +267,7 @@ You should now see the following screen appear in a new browser tab.
 
 ---
 title: Live Reload
-files:
-  - path: app/views/main.html
-    panel: 1
-    ref: ""
-    lineCount: 0
+files: []
 editable: false
 layout: ""
 
@@ -284,11 +276,7 @@ layout: ""
 With both `grunt serve` still running in the background and the Preview tab still open, open up the file `app/views/main.html` and change some text somewhere. You will notice that the browser tab auto reloads the content.
 ---
 title: Create a new Template to show a ToDo list
-files:
-  - path: app/scripts/controllers/main.js
-    panel: 1
-    ref: ""
-    lineCount: 0
+files: []
 editable: false
 layout: ""
 
