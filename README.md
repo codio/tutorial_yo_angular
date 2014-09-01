@@ -11,18 +11,18 @@ Take a look at the image below. You can see the Codio IDE with
 
 So you can work your way through the tutorial really easily without having to switch windows or tabs.
 
-![example](img/readme.png)
+![example](.guides/img/readme.png)
 
 ##SETUP
 Getting going is trivial ...
 
-![create codio project](img/create-project.png)
+![create codio project](.guides/img/create-project.png)
 
 1. [Create an account on Codio](https://codio.com/p/signup) (you can sign up with GitHub) and sign in. 
 1. Create a new project clicking the Create Project button and then, as shown above, select the Git tab.
 1. Paste into the 'Clone a Git repo' field `https://github.com/codio/tutorial_yo_angular.git`.
 1. When you press 'Create' you will be taken straight into the IDE.
-1. Go to the Tools->Tutorial menu option and simply follow the instructions.
+1. Go to the Tools->Guides(Beta)>Play menu option and simply follow the instructions.
 
 
 ###Video

@@ -1,22 +1,33 @@
-@annotation:tour
+---
+title: IDE Panels
+files: []
+editable: true
+layout: ""
+
+---
 #IDE Panels
 It is a really good idea to quickly set up a couple of IDE panels so the tutorial is really easy to follow.
 
 Codio lets you create panels from the View->Panels menu. To get it done really quickly, do the following:
 
 1. View->Panels->Split Vertical
-1. Drag the `(tutorial)` tab from the left panel over to the newly created right hand empty tab bar area.
+1. Drag this tab from the left panel over to the newly created right hand empty tab bar area
 1. You can close the `README.md` file now
 1. You should now see something like this
 
-![panels ready](img/panels-created.png)
+![panels ready](.guides/img/panels-created.png)
 
-Use the navigation buttons at the top to move to the next step. 
+Use the next button at the top to move to the next step. 
+---
+title: MEET YEOMAN
+files: []
+editable: true
+layout: ""
 
-@annotation:tour
-##MEET YEOMAN
+---
+#MEET YEOMAN
 
-![yeoman terminal](img/yeoman-term.png)
+![yeoman terminal](.guides/img/yeoman-term.png)
 
 Yeoman is a man in a hat with tricks up his sleeve.
 
@@ -44,33 +55,29 @@ To dig deeper into the sweet spots of AngularJS, take a look at the detailed [do
 
 The sample web app you'll build will be a Todo app. You will be able to add todos, delete todos, organize your todos using drag and drop, and save todos offline.
 
-![sample app](img/sample-app.png)
+![sample app](.guides/img/sample-app.png)
+---
+title: Opening a Terminal window
+files: []
+editable: true
+layout: ""
 
-@annotation:tour 
+---
 #Opening a Terminal window
 1. Click in the left code panel area
 1. Open up a Terminal window to your Codio Box from the 'Tools->Terminal' menu. This should now appear in the left panel. If it's in the right panel, drag the terminal tab across to the left one.
 
 Codio should now look like this:
 
-![terminal panels](img/panels-term.png)
+![terminal panels](.guides/img/panels-term.png)
 
-@annotation:tour 
-#Installing Yeoman
-Now we're ready to get going with the tutorial proper.
+---
+title: Installing Yeoman Generators
+files: []
+editable: true
+layout: ""
 
-Let's install Yeoman. In your terminal window type
-
-    npm install -g yo
-
-Now sit back and wait. If you were to do this on your laptop on a normal ADSL connection, it would be a LOT slower.
-
-Once the Yeoman installation is complete, you can check the version that was installed
-
-    yo --version && bower --version && grunt --version
-
-
-@annotation:tour
+---
 #Installing Yeoman Generators
 In a traditional web development workflow, you would need to spend a lot of time setting up boilerplate code for your webapp, downloading dependencies, and manually creating your web folder structure. Yeoman generators to the rescue! Generators do the hard work for you by scaffolding out your project. Let’s install a generator for creating AngularJS projects.
 
@@ -84,16 +91,20 @@ Install [generator-angular](https://www.npmjs.org/package/generator-angular) usi
     
 This will start to install the Node packages required for the generator. Using `@0.9.2` will request a specific version of the generator.
 
+---
+title: Use a Generator to scaffold your App
+files: []
+editable: false
+layout: ""
 
-
-@annotation:tour
+---
 #Use a Generator to scaffold your App
 
 We've used the word "scaffold" a few times but you might not know what that means. Scaffolding, in the Yeoman sense of the word, means generating files for your web app based on your specific configuration requests. In this step, you'll see how Yeoman can generate files specifically for Angular apps — with options for using other external libraries like SASS and Twitter Bootstrap — with minimal effort.
 
 Once a generator has been installed, you will automatically see the screen below (or it can be accessed via the Yeoman interactive menu: `$ yo`.
     
-![install angular](img/yo-install-angular.png)    
+![install angular](.guides/img/yo-install-angular.png)    
 
 ###Comments
 As you become more familiar with Yo, you might want to run generators directly without the use of the interactive menu:
@@ -108,7 +119,7 @@ The AngularJS generator provides options to include use Sass (with Compass) and/
 ###Keep calm and carry on
 With 'Run the Angular generator' highlighted, press Enter.
 
-![inputs](img/angular-inputs.png)
+![inputs](.guides/img/angular-inputs.png)
 
 Next you are prompted to select what Angular modules you would like to include as well. Angular modules are self-contained JavaScript files with helpful functionality. For example, the ngResource module (angular-resource.js) provides interaction support with RESTful services.
 
@@ -124,8 +135,13 @@ Don't worry if you see a log error like this followed by other errors
     npm ERR! not ok code 0 
 
 If you do see these errors, close the terminal window and re open to then run `bower install`.
+---
+title: Explore the File Tree
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Explore the File Tree
 In the file tree on the left, take a look at what was actually scaffolded. We have:
 
@@ -133,7 +149,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
   - **index.html**: the base html file for our Angular app
   - **404.html**, **favicon.ico**, and **robots.txt:** commonly used web files so you don’t have to create them yourself
   - **fonts**: fonts used in the package
-  - **images**: images used in the package
+ - **images**: images used in the package
   - **scripts**: our own JS files
   - **scripts/app.js**: our main Angular application code
   - **scripts/controllers**: our Angular controllers
@@ -143,7 +159,17 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 - **Gruntfile.js**, **package.json**, and **node_modules**: configuration and dependencies required by our Grunt tasks
 - **test**: a scaffolded out test runner and the unit tests for the project, including boilerplate tests for our controllers.
 
-@annotation:tour
+---
+title: Modify Gruntfile.js
+files:
+  - path: Gruntfile.js
+    panel: 1
+    ref: "hostname: 'localhost',"
+    lineCount: 2
+editable: false
+layout: ""
+
+---
 #Modify Gruntfile.js
 To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (somewhere around line 64) and change this
 
@@ -176,14 +202,19 @@ to this
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
 
+---
+title: Setting up the Codio menus
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Setting up the Codio menus
 Codio has the ability to save you lots of time by configuring the 'Run' menu (cli commands) and the 'Preview' menu. 
 
 Click on 'Configure...' as shown in the Run menu below.
 
-![run menu](img/run-menu.png)
+![run menu](.guides/img/run-menu.png)
 
 Now, copy and paste the following code into the code tab to save you the hassle ...
 
@@ -206,14 +237,19 @@ Now, copy and paste the following code into the code tab to save you the hassle 
 
 You will now see that the Run and Preview menus have been updated and look like this ...
 
-![run updated](img/run-updated.png)
+![run updated](.guides/img/run-updated.png)
+---
+title: "Running & Previewing the App"
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Running & Previewing the App
 ##Start Grunt
 Right, we are now ready to get Grunt to serve up our content. From the Run menu, select 'Grunt Serve' (If it appears in the upper panel covering the tutorial, then drag it down to the lower panel). 
 
-![menus done](img/menus-done.png)
+![menus done](.guides/img/menus-done.png)
 
 This does nothing more than save you the hassle of typing on the command line ...
 
@@ -231,13 +267,32 @@ Now, from the Preview menu to the right, select 'Yeoman Demo'. Again, this is ju
 
 You should now see the following screen appear in a new browser tab.
 
-![allo allo](img/allo.png)
+![allo allo](.guides/img/allo.png)
 
-@annotation:tour
+---
+title: Live Reload
+files:
+  - path: app/views/main.html
+    panel: 1
+    ref: ""
+    lineCount: 0
+editable: false
+layout: ""
+
+---
 #Live Reload
 With both `grunt serve` still running in the background and the Preview tab still open, open up the file `app/views/main.html` and change some text somewhere. You will notice that the browser tab auto reloads the content.
+---
+title: Create a new Template to show a ToDo list
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 1
+    ref: ""
+    lineCount: 0
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Create a new Template to show a ToDo list
 ###app/views/main.html
 First, let's modify our view (views/main.html) to output our todos items as text input fields. Copy and paste the following code into the `app/views/main.html` file (replace everything).
@@ -265,9 +320,14 @@ The [ng-model](http://docs.angularjs.org/api/ng.directive:ngModel) attribute is 
 
 Your browser should now show something like this
 
-![preview](img/preview-1.png)
+![preview](.guides/img/preview-1.png)
+---
+title: Adding a ToDo
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Adding a ToDo
 Let’s implement a way to add new todo items to the list of existing todos within the application.
 
@@ -297,9 +357,14 @@ Modify `app/views/main.html` by adding a form element in between the `<h2>` and 
 
 This adds a form with a submit button to the top of the page. It utilises another Angular directive, [ng-submit](http://docs.angularjs.org/api/ng.directive:ngSubmit) which we’ll get to next. Return to your browser and the UI should now look similar to this:
 
-![preview](img/preview-2.png)
+![preview](.guides/img/preview-2.png)
+---
+title: Making the Add button work
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Making the Add button work
 If you click the Add button currently, nothing will happen - let’s change that.
 
@@ -329,9 +394,14 @@ View the app in the browser again. Type some text in the input field for a new t
 
 **Note**: if you enter in more than one blank todo item, or a todo item with the same name, your todo app will unexpectedly stop working. :( As a fun exercise on your own time, enhance the addTodo function with error checking.
 
-![preview](img/preview-3.png)
+![preview](.guides/img/preview-3.png)
+---
+title: Adding a Remove Button
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Adding a Remove Button
 Let’s now add the ability to remove a todo item. We’ll need to add a new remove button alongside each todo item.
 
@@ -349,13 +419,19 @@ Replace the stuff below `<!-- Todos list -->` with this code
 
 then run your app again, and you should get this ...
 
-![remove](img/remove-buttons.png)
+![remove](.guides/img/remove-buttons.png)
 
 We introduced a new Angular directive above, [ng-click](http://docs.angularjs.org/api/ng.directive:ngClick). ng-click allows you to specify custom behaviours when an element is clicked. In this instance, we call `removeTodo()` and pass `$index` to the function.
 
 The value of `$index` will be the array index of the current todo item within the ng-repeat directive. For example, the first item will have an array index of 0 and `removeTodo` will be passed the value of 0. Similarly, the last item of a todo list with 5 items will have an array index of 4 and `removeTodo` will be passed a value of 4.
 
-@annotation:tour
+---
+title: Making the remove buttons work
+files: []
+editable: false
+layout: ""
+
+---
 #Making the remove buttons work
 Let’s now add some logic for removing todo items to our controller. The following `removeTodo` function removes one todo item from the items array using the JavaScript `splice` method at the given `$index` value:
 
@@ -384,8 +460,13 @@ Now you can use the 'x' buttons to remove items.
 One thing you might notice is that although we’re able to add and remove items, we don’t have a way to persist them. Any time we refresh the page our todo items are reset back to the defaults in our todos array hardcoding in `main.js`. 
 
 Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
+---
+title: Using Bower to install packages
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Using Bower to install packages
 
 Let’s add some order to our list and make it sortable. For this we’re going to use Bower to install the [AngularUI Sortable](https://github.com/angular-ui/ui-sortable) module, a directive component for AngularJS.
@@ -420,8 +501,13 @@ If you have multiple packages that you want to install, you can do it in one lin
 #Confirm Installation
 
 Take a look at your **bower_components** directory just to check that everything is there as expected. You should see folders for "jquery-ui" and "angular-ui-sortable" alongside the previously installed angular packages. If you do not see these new folders immediately, refresh the file tree using the refresh button at the bottom right of the tree
+---
+title: Make Todos Sortable
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Make Todos Sortable
 
 References to these newly installed dependencies must be added to our **app/index.html** file. You could manually add the AngularUI Sortable module and jQueryUI script files yourself but Yeoman will automate this for you!
@@ -448,8 +534,13 @@ You'll see that the script section at the bottom of **app/index.html** has autom
     <script src="bower_components/angular-ui-sortable/sortable.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+---
+title: Using Sortable Module
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Using Sortable Module
 
 **app/scripts/app.js**
@@ -550,13 +641,18 @@ The full todo list markup looks like this now:
     
 Back in the browser, we can now re-order our list by dragging the entries up and down from:
 
-![order1](img/order1.png) 
+![order1](.guides/img/order1.png) 
 
 to:
 
-![order2](img/order2.png)
+![order2](.guides/img/order2.png)
+---
+title: Testing with Karma and Jasmine
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 ##Testing with Karma and Jasmine
 For those unfamiliar with [Karma](http://karma-runner.github.io/), it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: [ngScenario](https://code.angularjs.org/1.2.16/docs/guide/e2e-testing) and [Jasmine](http://jasmine.github.io/). When we ran `yo angular` earlier in this codelab, the generator scaffolded a **test** directory in the root folder, created a `karma.conf.js` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
 
@@ -587,9 +683,13 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
       'test/spec/**/*.js'
     ],
 
+---
+title: Modify test main.js
+files: []
+editable: false
+layout: ""
 
-
-@annotation:tour
+---
 #Modify test main.js
 Next, modify the unit test for your `main.js`. You’ll find the tests scaffolding out in the `test` folder, so open up `test/spec/controllers/main.js`.
 
@@ -630,17 +730,20 @@ Re-running our tests with grunt test should see our tests passing. Don't worry a
 
 You should see something like this ...
 
-![test run](img/test-run.png)
+![test run](.guides/img/test-run.png)
 
 Fantastic!
 
 Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
+---
+title: Get Ready for Production
+files: []
+editable: false
+layout: ""
 
-
-
-@annotation:tour
+---
 #Get Ready for Production
-![yeoman sitting](img/yeoman-sitting.png)
+![yeoman sitting](.guides/img/yeoman-sitting.png)
 
 Ready to show your beautiful todo app to the world? Let’s try to create a production version of our application. We’ll want to lint our code, run our tests, concatenate and minify our scripts and styles to save on those network requests, optimize images if we were using any, compile the output of any preprocessors we’re using and in general make our application really lean. Phew!
 
@@ -661,8 +764,13 @@ Want to preview your production app locally? That’s just another simple grunt 
 - from the command line, `grunt serve:dist`
 
 It will build your project and launch a local web server. Yo Hero!
+---
+title: Make Todos persistent with Local Storage
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Make Todos persistent with Local Storage
 
 Let’s revisit the issue of items not persisting when the browser refreshes.
@@ -673,10 +781,15 @@ To easily achieve this, we can use another Angular module called [angular-local-
 
 and you'll see something like this ...
 
-![bower install output](img/bower-install.png)
+![bower install output](.guides/img/bower-install.png)
 
+---
+title: Modifying app/index.html for Local Storage
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Modifying app/index.html for Local Storage
 There are now 4 tutorial steps you'll run through to get persistant storage up and running, so don't start previewing just yet!
 
@@ -705,8 +818,13 @@ Your `index.html` scripts should now look like this:
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+---
+title: Modifying app/scripts/app.js for Local Storage
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Modifying app/scripts/app.js for Local Storage
 
 **IMPORTANT**: don't modify `main.js` by mistake. I made this mistake a couple of times setting this all up!
@@ -767,8 +885,13 @@ Our todo module (app/scripts/app.js) should now look like this:
             redirectTo: '/'
           });
       });
-      
-@annotation:tour
+---
+title: Modifying app/scripts/controllers/main.js for Local Storage
+files: []
+editable: false
+layout: ""
+
+---
 #Modifying app/scripts/controllers/main.js for Local Storage
 You will also need to update your controller (scripts/controllers/main.js) to declare a dependency on the `localStorage` service. Add `localStorageService` as the second parameter in the callback function.
 
@@ -826,12 +949,17 @@ We now have a controller that is as follows:
 If you look at your app in the browser now you’ll see that there are no items in the todo list. The app is initialising the todos array from `localStorage` and we haven’t given it any todo items yet.
 
 Go ahead and refresh the browser and start adding some items. Then refresh the browser and you'll see everything persisting nicely.
+---
+title: Checking in Dev Tools
+files: []
+editable: false
+layout: ""
 
-@annotation:tour
+---
 #Checking in Dev Tools
 We can confirm whether our data is being persisted to `localStorage` by checking the Resources panel in Chrome DevTools and selecting "Local Storage" from the lefthand side:
 
-![dev tools](img/dev-tools.png)
+![dev tools](.guides/img/dev-tools.png)
 
 Pat yourself on the back! You just used Yeoman to build a snazzy todo app in no time. Can you imagine doing front-end web development in any other way now?
 
@@ -840,4 +968,3 @@ So to recap, in this section we:
 - Scaffolded the boilerplate for an application using `yo`
 - Installed dependencies to improve the functionality in our app with `bower`
 - Used `grunt serve` to build and preview an interim version of our app. All our edits resulted in a live reload of the page giving us a nice real-time view of what we authored.
-
