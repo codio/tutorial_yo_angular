@@ -14,7 +14,7 @@ You should now see something like this
 
 ![panels ready](.guides/img/panels-created.png)
 
-Use the next button at the top to move to the next step. 
+To hide the section titles, click on the 'Hamburger' icon and use the next button at the top to move to the next step. 
 ---
 title: MEET YEOMAN
 files: []
@@ -712,7 +712,7 @@ Delete the following:
       expect(scope.awesomeThings.length).toBe(3);
     });
 
-And replace that test with the following:
+And replace that text with the following:
 
     it('should have no items to start', function () {
       expect(scope.todos.length).toBe(0);
