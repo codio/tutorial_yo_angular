@@ -274,6 +274,10 @@ files:
     panel: 0
     ref: ""
     lineCount: 0
+  - path: app/views/main.html
+    panel: 0
+    ref: ""
+    lineCount: 0
 editable: true
 layout: ""
 
@@ -307,8 +311,12 @@ Your browser should now show something like this
 ![preview](.guides/img/preview-1.png)
 ---
 title: Adding a ToDo
-files: []
-editable: false
+files:
+  - path: app/views/main.html
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -343,8 +351,12 @@ This adds a form with a submit button to the top of the page. It utilises anothe
 ![preview](.guides/img/preview-2.png)
 ---
 title: Making the Add button work
-files: []
-editable: false
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -379,8 +391,12 @@ View the app in the browser again. Type some text in the input field for a new t
 ![preview](.guides/img/preview-3.png)
 ---
 title: Adding a Remove Button
-files: []
-editable: false
+files:
+  - path: app/views/main.html
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -408,8 +424,12 @@ The value of `$index` will be the array index of the current todo item within th
 
 ---
 title: Making the remove buttons work
-files: []
-editable: false
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
@@ -513,6 +533,10 @@ You'll see that the script section at the bottom of **app/index.html** has autom
 ---
 title: Using Sortable Module
 files:
+  - path: app/views/main.html
+    panel: 0
+    ref: ""
+    lineCount: 0
   - path: app/scripts/app.js
     panel: 0
     ref: ""
@@ -667,11 +691,11 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: test/spec/controllers/main.js
+  - path: app/scripts/controllers/main.js
     panel: 0
     ref: ""
     lineCount: 0
-  - path: app/scripts/controllers/main.js
+  - path: test/spec/controllers/main.js
     panel: 0
     ref: ""
     lineCount: 0
@@ -770,8 +794,12 @@ and you'll see something like this ...
 
 ---
 title: Modifying app/index.html for Local Storage
-files: []
-editable: false
+files:
+  - path: app/index.html
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
 layout: ""
 
 ---
