@@ -5,7 +5,6 @@ editable: false
 layout: 2-panels-tree
 
 ---
-
 It is a really good idea to quickly set up a couple of IDE panels so the tutorial is really easy to follow.
 
 We have set up this Guide for 2 panels.
@@ -116,7 +115,7 @@ Next you are prompted to select what Angular modules you would like to include a
 
 You can deselect options using the spacebar. Let’s roll with the defaults. (So if you have been playing around with the spacebar, make sure that all the modules are marked as green.)
 
-Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait it will be ready.
+Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait and a request for you to confirm bower anonymously report usage statistics it will be ready.
 
 Don't worry if you see a log error like this followed by other errors
 
@@ -160,7 +159,7 @@ editable: true
 layout: ""
 
 ---
-To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (somewhere around line 64) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (somewhere around line 70) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
@@ -174,7 +173,7 @@ to this
 
 Codio leaves all Ports between 1024 and 9999 at your disposal, so we need to modify the livereload port.
 
-Also search for `<%= yeoman.app %>/{,*/}*.html',` (around line 53) to change this:
+Also search for `<%= yeoman.app %>/{,*/}*.html',` (around line 58) to change this:
 
     files: [
           '<%= yeoman.app %>/{,*/}*.html',
