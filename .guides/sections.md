@@ -13,7 +13,7 @@ You should now see something like this
 
 ![panels ready](.guides/img/panels-created.png)
 
-To hide the section titles, click on the 'Hamburger' icon and use the next button at the top to move to the next step. 
+To hide the section titles, click on the 'Hamburger' icon and use the next (>>) button at the bottom to move to the next step. 
 ---
 title: MEET YEOMAN
 files: []
