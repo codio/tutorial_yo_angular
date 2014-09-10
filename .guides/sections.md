@@ -148,7 +148,7 @@ If you do see these errors, close the terminal window and re open to then run `b
 ---
 title: Explore the File Tree
 files:
-  - path: "#terminal"
+  - path: "#tabs"
     action: close
     panel: 0
     ref: ""
@@ -506,7 +506,7 @@ Don’t worry, we’ll fix this later after we learn more about installing packa
 ---
 title: Using Bower to install packages
 files:
-  - path: "#terminal, app/scripts/controllers/main.js, app/views/main.html. "
+  - path: "#tabs"
     action: close
     panel: 0
     ref: ""
@@ -701,12 +701,7 @@ to:
 ---
 title: Testing with Karma and Jasmine
 files:
-  - path: test/karma.conf.js
-    action: open
-    panel: 0
-    ref: ""
-    lineCount: 0
-  - path: "app/scripts/app.js, app/views/main.html"
+  - path: "#tabs"
     action: close
     panel: 0
     ref: ""
@@ -716,7 +711,7 @@ layout: ""
 ---
 For those unfamiliar with [Karma](http://karma-runner.github.io/), it is a JavaScript test runner that is test framework agnostic. The Angular generator has two included test frameworks: [ngScenario](https://code.angularjs.org/1.2.16/docs/guide/e2e-testing) and [Jasmine](http://jasmine.github.io/). When we ran `yo angular` earlier in this codelab, the generator scaffolded a **test** directory in the root folder, created a `karma.conf.js` file, and pulled in the Node modules for Karma. We’ll be editing a Jasmine script to describe our tests soon but let’s see how we can run tests first.
 
-Kill `grunt server` using Ctrl+C or just open up another terminal window from the Tools->Terminal menu.
+`grunt serve` has been terminated for you by the closing of the terminal window.
 
 There is already a grunt task scaffolded out in our `Gruntfile.js` for running tests. It can be executed in one of two ways
 
@@ -874,9 +869,9 @@ Modify `app/index.html` to include the new Angular module by adding the followin
 
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
     
-**Note**: if using `bower.json`, you may need to Ctrl+C to exit the current `grunt serve` instance, run `bower install` and then re-run `grunt serve` to get some automated magic in your `index.html`.
+Re-run `grunt serve` to get some automated magic in your `index.html`.
 
-Your `index.html` scripts should now look like this:
+Open your `index.html` and the scripts should now look like this:
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
