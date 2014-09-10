@@ -65,6 +65,20 @@ Codio should now look like this:
 ![terminal panels](.guides/img/panels-term.png)
 
 ---
+title: Installing Yeoman
+files: []
+editable: false
+layout: ""
+
+---
+Now we're ready to get going with the tutorial proper.
+
+Let's install Yeoman. In your terminal window type
+
+`npm install -g yo`
+
+Now sit back and wait. If you were to do this on your laptop on a normal ADSL connection, it would be a LOT slower.
+---
 title: Installing Yeoman Generators
 files: []
 editable: false
@@ -115,7 +129,7 @@ Next you are prompted to select what Angular modules you would like to include a
 
 You can deselect options using the spacebar. Let’s roll with the defaults. (So if you have been playing around with the spacebar, make sure that all the modules are marked as green.)
 
-Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait and a request for you to confirm bower anonymously report usage statistics it will be ready.
+Okay, hit enter once your inputs look like you see above. Yeoman will automatically scaffold out your app, grab your dependencies, and pull in a few useful Grunt tasks for your workflow. After a short wait and a request for you to confirm bower reporting usage statistics it will be ready.
 
 Don't worry if you see a log error like this followed by other errors
 
@@ -152,6 +166,7 @@ In the file tree on the left, take a look at what was actually scaffolded. We ha
 title: Modify Gruntfile.js
 files:
   - path: Gruntfile.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -192,7 +207,11 @@ to this
 
 ---
 title: Setting up the Codio menus
-files: []
+files:
+  - path: Gruntfile.js
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
@@ -227,7 +246,11 @@ You will now see that the Run and Preview menus have been updated and look like 
 ![run updated](.guides/img/run-updated.png)
 ---
 title: "Running & Previewing the App"
-files: []
+files:
+  - path: .codio
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
@@ -259,6 +282,7 @@ You should now see the following screen appear in a new browser tab.
 title: Live Reload
 files:
   - path: app/views/main.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -271,10 +295,12 @@ With both `grunt serve` still running in the background and the Preview tab stil
 title: Create a new Template to show a ToDo list
 files:
   - path: app/scripts/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
   - path: app/views/main.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -393,6 +419,7 @@ View the app in the browser again. Type some text in the input field for a new t
 title: Adding a Remove Button
 files:
   - path: app/views/main.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -462,7 +489,14 @@ One thing you might notice is that although we’re able to add and remove items
 Don’t worry, we’ll fix this later after we learn more about installing packages with Bower.
 ---
 title: Using Bower to install packages
-files: []
+files:
+  - path: app/scripts/controllers/main.js
+    action: close
+    panel: 0
+    ref: ""
+  - path: app/views/main.html
+    action: close
+    ref: ""
 editable: false
 layout: ""
 
@@ -534,10 +568,12 @@ You'll see that the script section at the bottom of **app/index.html** has autom
 title: Using Sortable Module
 files:
   - path: app/views/main.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
   - path: app/scripts/app.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -652,9 +688,18 @@ to:
 title: Testing with Karma and Jasmine
 files:
   - path: test/karma.conf.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
+  - path: app/scripts/app.js
+    action: close
+    panel: 0
+    ref: ""
+  - path: app/views/main.html
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
@@ -691,14 +736,20 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: app/scripts/controllers/main.js
+  - path: scripts/controllers/main.js.
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
   - path: test/spec/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
+  - path: test/karma.conf.js
+    action: close
+    panel: 0
+    ref: ""
 editable: true
 layout: ""
 
@@ -749,7 +800,15 @@ Fantastic!
 Writing unit tests make it easier to catch bugs as your app gets bigger and when more developers join your team. The scaffolding feature of Yeoman makes writing unit tests easier so no excuse for not writing your own tests! ;)
 ---
 title: Get Ready for Production
-files: []
+files:
+  - path: scripts/controllers/main.js.
+    action: close
+    panel: 0
+    ref: ""
+  - path: test/spec/controllers/main.js
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
@@ -796,6 +855,7 @@ and you'll see something like this ...
 title: Modifying app/index.html for Local Storage
 files:
   - path: app/index.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -834,9 +894,14 @@ Your `index.html` scripts should now look like this:
 title: Modifying app/scripts/app.js for Local Storage
 files:
   - path: app/scripts/app.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
+  - path: app/index.html
+    action: close
+    panel: 0
+    ref: ""
 editable: true
 layout: ""
 
@@ -903,9 +968,14 @@ Our todo module (app/scripts/app.js) should now look like this:
 title: Modifying app/scripts/controllers/main.js for Local Storage
 files:
   - path: app/scripts/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
+  - path: app/scripts/app.js
+    action: close
+    panel: 0
+    ref: ""
 editable: true
 layout: ""
 
@@ -968,7 +1038,11 @@ If you look at your app in the browser now you’ll see that there are no items 
 Go ahead and refresh the browser and start adding some items. Then refresh the browser and you'll see everything persisting nicely.
 ---
 title: Checking in Dev Tools
-files: []
+files:
+  - path: app/scripts/controllers/main.js
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
