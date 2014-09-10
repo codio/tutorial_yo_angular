@@ -587,6 +587,10 @@ files:
     panel: 0
     ref: ""
     lineCount: 0
+  - path: app/index.html
+    action: close
+    panel: 0
+    ref: ""
 editable: true
 layout: ""
 
@@ -746,7 +750,7 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: scripts/controllers/main.js.
+  - path: app/scripts/controllers/main.js.
     action: open
     panel: 0
     ref: ""
@@ -811,7 +815,7 @@ Writing unit tests make it easier to catch bugs as your app gets bigger and when
 ---
 title: Get Ready for Production
 files:
-  - path: scripts/controllers/main.js.
+  - path: app/scripts/controllers/main.js.
     action: close
     panel: 0
     ref: ""
