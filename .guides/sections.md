@@ -204,6 +204,16 @@ to this
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+        
+Also (around line 16) remove the following from the wiredep section:
+
+		options: {
+   		cwd: '<%%= yeoman.app %>'
+			},
+		}
+
+
+	
 
 ---
 title: Setting up the Codio menus
