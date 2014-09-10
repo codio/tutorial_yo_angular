@@ -854,11 +854,10 @@ and you'll see something like this ...
 ---
 title: Modifying app/index.html for Local Storage
 files:
-  - path: app/index.html
-    action: open
+  - path: "#tabs"
+    action: close
     panel: 0
     ref: ""
-    lineCount: 0
 editable: true
 layout: ""
 
@@ -1039,7 +1038,7 @@ Go ahead and refresh the browser and start adding some items. Then refresh the b
 ---
 title: Checking in Dev Tools
 files:
-  - path: app/scripts/controllers/main.js
+  - path: "#tabs"
     action: close
     panel: 0
     ref: ""
