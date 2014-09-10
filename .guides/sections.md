@@ -52,11 +52,17 @@ The sample web app you'll build will be a Todo app. You will be able to add todo
 ![sample app](.guides/img/sample-app.png)
 ---
 title: Opening a Terminal window
-files: []
+files:
+  - path: "#terminal"
+    action: open
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
 ---
+A Terminal window has been opened for you but if you need to open one yourself at any time 
+
 1. Click in the left code panel area
 1. Open up a Terminal window to your Codio Box from the 'Tools->Terminal' menu. This should now appear in the left panel. If it's in the right panel, drag the terminal tab across to the left one.
 
@@ -141,7 +147,11 @@ Don't worry if you see a log error like this followed by other errors
 If you do see these errors, close the terminal window and re open to then run `bower install`.
 ---
 title: Explore the File Tree
-files: []
+files:
+  - path: "#terminal"
+    action: close
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
@@ -304,12 +314,7 @@ With both `grunt serve` still running in the background and the Preview tab stil
 ---
 title: Create a new Template to show a ToDo list
 files:
-  - path: app/scripts/controllers/main.js
-    action: open
-    panel: 0
-    ref: ""
-    lineCount: 0
-  - path: app/views/main.html
+  - path: "app/scripts/controllers/main.js, app/views/main.html"
     action: open
     panel: 0
     ref: ""
@@ -463,6 +468,7 @@ The value of `$index` will be the array index of the current todo item within th
 title: Making the remove buttons work
 files:
   - path: app/scripts/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -500,12 +506,13 @@ Don’t worry, we’ll fix this later after we learn more about installing packa
 ---
 title: Using Bower to install packages
 files:
-  - path: app/scripts/controllers/main.js
+  - path: "#terminal, app/scripts/controllers/main.js, app/views/main.html. "
     action: close
     panel: 0
     ref: ""
-  - path: app/views/main.html
-    action: close
+  - path: "#terminal"
+    action: open
+    panel: 0
     ref: ""
 editable: false
 layout: ""
@@ -552,9 +559,7 @@ layout: ""
 ---
 References to these newly installed dependencies must be added to our **app/index.html** file. You could manually add the AngularUI Sortable module and jQueryUI script files yourself but Yeoman will automate this for you!
 
-Quit your current command line process by using the Ctrl+C keyboard command in the Terminal or closing the Grunt Serve tab
-
-Then run `grunt serve` again.
+Run `grunt serve` again.
 
 You'll see that the script section at the bottom of **app/index.html** has automatically updated to include `jquery-ui/ui/jquery-ui.js` and `angular-ui-sortable/sortable.js`:
 
@@ -577,12 +582,7 @@ You'll see that the script section at the bottom of **app/index.html** has autom
 ---
 title: Using Sortable Module
 files:
-  - path: app/views/main.html
-    action: open
-    panel: 0
-    ref: ""
-    lineCount: 0
-  - path: app/scripts/app.js
+  - path: "app/views/main.html, app/scripts/app.js"
     action: open
     panel: 0
     ref: ""
@@ -706,15 +706,11 @@ files:
     panel: 0
     ref: ""
     lineCount: 0
-  - path: app/scripts/app.js
+  - path: "app/scripts/app.js, app/views/main.html"
     action: close
     panel: 0
     ref: ""
-  - path: app/views/main.html
-    action: close
-    panel: 0
-    ref: ""
-editable: false
+editable: true
 layout: ""
 
 ---
@@ -750,12 +746,7 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: app/scripts/controllers/main.js.
-    action: open
-    panel: 0
-    ref: ""
-    lineCount: 0
-  - path: test/spec/controllers/main.js
+  - path: "app/scripts/controllers/main.js, test/spec/controllers/main.js"
     action: open
     panel: 0
     ref: ""
@@ -815,11 +806,7 @@ Writing unit tests make it easier to catch bugs as your app gets bigger and when
 ---
 title: Get Ready for Production
 files:
-  - path: app/scripts/controllers/main.js.
-    action: close
-    panel: 0
-    ref: ""
-  - path: test/spec/controllers/main.js
+  - path: "app/scripts/controllers/main.js, test/spec/controllers/main.js"
     action: close
     panel: 0
     ref: ""
@@ -850,7 +837,11 @@ Want to preview your production app locally? That’s just another simple grunt 
 It will build your project and launch a local web server. Yo Hero!
 ---
 title: Make Todos persistent with Local Storage
-files: []
+files:
+  - path: "#terminal"
+    action: open
+    panel: 0
+    ref: ""
 editable: false
 layout: ""
 
