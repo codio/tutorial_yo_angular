@@ -178,13 +178,13 @@ files:
   - path: Gruntfile.js
     action: open
     panel: 0
-    ref: ""
-    lineCount: 0
+    ref: "// Change this to '0.0.0.0' to access the server from outside."
+    lineCount: 4
 editable: true
 layout: ""
 
 ---
-To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (somewhere around line 70) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (this area has been highlighted for you) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
@@ -215,7 +215,7 @@ to this
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
         
-Also (around line 16) remove the following from the wiredep section:
+Also (around line 165) remove the following from the wiredep section:
 
 		options: {
    		cwd: '<%%= yeoman.app %>'
@@ -436,8 +436,8 @@ files:
   - path: app/views/main.html
     action: open
     panel: 0
-    ref: ""
-    lineCount: 0
+    ref: "<!-- Todos list -->"
+    lineCount: 7
 editable: true
 layout: ""
 
@@ -590,7 +590,8 @@ files:
   - path: app/index.html
     action: close
     panel: 0
-    ref: ""
+    ref: "<!-- Todos list -->"
+    lineCount: 9
 editable: true
 layout: ""
 
@@ -744,8 +745,8 @@ files:
   - path: "app/scripts/controllers/main.js, test/spec/controllers/main.js"
     action: open
     panel: 0
-    ref: ""
-    lineCount: 0
+    ref: "it('should attach a list of awesomeThings to the scope', function () {"
+    lineCount: 3
   - path: test/karma.conf.js
     action: close
     panel: 0
