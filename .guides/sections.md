@@ -178,13 +178,12 @@ files:
   - path: Gruntfile.js
     action: open
     panel: 0
-    ref: "// Change this to '0.0.0.0' to access the server from outside."
-    lineCount: 4
+    ref: ""
 editable: true
 layout: ""
 
 ---
-To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (this area has been highlighted for you) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (around line 71) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
@@ -351,49 +350,10 @@ Your browser should now show something like this
 
 ![preview](.guides/img/preview-1.png)
 ---
-title: Adding a ToDo
-files:
-  - path: app/views/main.html
-    panel: 0
-    ref: ""
-    lineCount: 0
-editable: true
-layout: ""
-
----
-Let’s implement a way to add new todo items to the list of existing todos within the application.
-
-Modify `app/views/main.html` by adding a form element in between the `<h2>` and `<p>` elements from the previous section. Your views/main.html should now look like this:
-
-    <div class="container">
-      <h2>My todos</h2>
-
-      <!-- Todos input -->
-      <form role="form" ng-submit="addTodo()">
-        <div class="row">
-          <div class="input-group">
-            <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
-            <span class="input-group-btn">
-              <input type="submit" class="btn btn-primary" value="Add">
-            </span>
-          </div>
-        </div>
-      </form>
-      <p></p>
-
-      <!-- Todos list -->
-      <p class="form-group" ng-repeat="todo in todos">
-        <input type="text" ng-model="todo" class="form-control">
-      </p>
-    </div>
-
-This adds a form with a submit button to the top of the page. It utilises another Angular directive, [ng-submit](http://docs.angularjs.org/api/ng.directive:ngSubmit) which we’ll get to next. Return to your browser and the UI should now look similar to this:
-
-![preview](.guides/img/preview-2.png)
----
 title: Making the Add button work
 files:
   - path: app/scripts/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -431,13 +391,54 @@ View the app in the browser again. Type some text in the input field for a new t
 
 ![preview](.guides/img/preview-3.png)
 ---
+title: Adding a ToDo
+files:
+  - path: app/views/main.html
+    action: open
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
+layout: ""
+
+---
+Let’s implement a way to add new todo items to the list of existing todos within the application.
+
+Modify `app/views/main.html` by adding a form element in between the `<h2>` and `<p>` elements from the previous section. Your views/main.html should now look like this:
+
+    <div class="container">
+      <h2>My todos</h2>
+
+      <!-- Todos input -->
+      <form role="form" ng-submit="addTodo()">
+        <div class="row">
+          <div class="input-group">
+            <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
+            <span class="input-group-btn">
+              <input type="submit" class="btn btn-primary" value="Add">
+            </span>
+          </div>
+        </div>
+      </form>
+      <p></p>
+
+      <!-- Todos list -->
+      <p class="form-group" ng-repeat="todo in todos">
+        <input type="text" ng-model="todo" class="form-control">
+      </p>
+    </div>
+
+This adds a form with a submit button to the top of the page. It utilises another Angular directive, [ng-submit](http://docs.angularjs.org/api/ng.directive:ngSubmit) which we’ll get to next. Return to your browser and the UI should now look similar to this:
+
+![preview](.guides/img/preview-2.png)
+---
 title: Adding a Remove Button
 files:
   - path: app/views/main.html
     action: open
     panel: 0
     ref: "<!-- Todos list -->"
-    lineCount: 7
+    lineCount: 4
 editable: true
 layout: ""
 
@@ -590,8 +591,7 @@ files:
   - path: app/index.html
     action: close
     panel: 0
-    ref: "<!-- Todos list -->"
-    lineCount: 9
+    ref: ""
 editable: true
 layout: ""
 
@@ -742,15 +742,20 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: "app/scripts/controllers/main.js, test/spec/controllers/main.js"
+  - path: app/scripts/controllers/main.js
     action: open
     panel: 0
-    ref: "it('should attach a list of awesomeThings to the scope', function () {"
-    lineCount: 3
+    ref: "$scope.todos = ['Item 1', 'Item 2', 'Item 3'];"
+    lineCount: 1
   - path: test/karma.conf.js
     action: close
     panel: 0
     ref: ""
+  - path: " test/spec/controllers/main.js"
+    action: open
+    panel: 0
+    ref: "it('should attach a list of awesomeThings to the scope', function () {"
+    lineCount: 3
 editable: true
 layout: ""
 
@@ -993,11 +998,8 @@ So now, rather than reading our todos from a static array, we’ll be reading it
 
 We’ll also use the angular [$watch](http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch) listener to watch for changes in the value of `$scope.todos`. If someone adds or removes a todo, it will then keep our `localStorage` todos datastore in sync.
 
-Therefore, we need to remove the current `$scope.todos` declaration:
+Therefore, we need to change the current `$scope.todos` declaration to:
 
-    $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
-
-And replace it with this:
 
     var todosInStore = localStorageService.get('todos');
 
