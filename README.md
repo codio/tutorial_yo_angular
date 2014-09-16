@@ -24,10 +24,11 @@ Getting going is trivial ...
 1. When you press 'Create' you will be taken straight into the IDE.
 
 
-Or simply click here to [![IDE](https://codio-public.s3.amazonaws.com/sharing/demo-in-ide.png)](https://codio.com/p/create/?from_github=/codio/tutorial_yo_angular)
+Or simply click here to [![IDE](https://codio-public.s3.amazonaws.com/sharing/demo-in-ide.png)](https://codio.com/p/create/?from_github=codio/tutorial_yo_angular)
 
 - Go to the Tools->Guides(Beta)>Play menu option and simply follow the instructions.
 
 ###Video
 If you'd like to see how Codio and this Codelab tutorial work together, [here's a very short video](https://vimeo.com/88482886).
+
 
