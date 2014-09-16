@@ -178,12 +178,13 @@ files:
   - path: Gruntfile.js
     action: open
     panel: 0
-    ref: ""
+    ref: "// Change this to '0.0.0.0' to access the server from outside."
+    lineCount: 4
 editable: true
 layout: ""
 
 ---
-To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (around line 71) and change this
+To run properly in Codio, you'll want to open up `Gruntfile.js` in the root of your App and search for `localhost` (this area has been highlighted for you) and change this
 
     // Change this to '0.0.0.0' to access the server from outside.
     hostname: 'localhost',
@@ -350,51 +351,9 @@ Your browser should now show something like this
 
 ![preview](.guides/img/preview-1.png)
 ---
-title: Making the Add button work
-files:
-  - path: app/scripts/controllers/main.js
-    action: open
-    panel: 0
-    ref: ""
-    lineCount: 0
-editable: true
-layout: ""
-
----
-If you click the Add button currently, nothing will happen - let’s change that.
-
-`ng-submit` binds an angular expression to the onsubmit event of the form. If no action attribute is applied to the form, it also prevents the default browser behaviour. In our example we’ve added an angular expression of `addTodo()`.
-
-The following `addTodo` function pushes new todo items onto the existing todo items array and then clears the text input field. Let's add the following code inside the existing code
-
-    $scope.addTodo = function () {
-      $scope.todos.push($scope.todo);
-      $scope.todo = '';
-    };
-
-So, your `app/scripts/controllers/main.js` should now look like this  ...
-
-    'use strict';
-
-    angular.module('workspaceApp')
-      .controller('MainCtrl', function ($scope) {
-        $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
-        $scope.addTodo = function () {
-          $scope.todos.push($scope.todo);
-          $scope.todo = '';
-        };
-      });
-
-View the app in the browser again. Type some text in the input field for a new todo item and hit the Add button. It will be immediately reflected in your todos list. Here you can see I have added 2 new todos.
-
-**Note**: if you enter in more than one blank todo item, or a todo item with the same name, your todo app will unexpectedly stop working. :( As a fun exercise on your own time, enhance the addTodo function with error checking.
-
-![preview](.guides/img/preview-3.png)
----
 title: Adding a ToDo
 files:
   - path: app/views/main.html
-    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -432,13 +391,53 @@ This adds a form with a submit button to the top of the page. It utilises anothe
 
 ![preview](.guides/img/preview-2.png)
 ---
+title: Making the Add button work
+files:
+  - path: app/scripts/controllers/main.js
+    panel: 0
+    ref: ""
+    lineCount: 0
+editable: true
+layout: ""
+
+---
+If you click the Add button currently, nothing will happen - let’s change that.
+
+`ng-submit` binds an angular expression to the onsubmit event of the form. If no action attribute is applied to the form, it also prevents the default browser behaviour. In our example we’ve added an angular expression of `addTodo()`.
+
+The following `addTodo` function pushes new todo items onto the existing todo items array and then clears the text input field. Let's add the following code inside the existing code
+
+    $scope.addTodo = function () {
+      $scope.todos.push($scope.todo);
+      $scope.todo = '';
+    };
+
+So, your `app/scripts/controllers/main.js` should now look like this  ...
+
+    'use strict';
+
+    angular.module('workspaceApp')
+      .controller('MainCtrl', function ($scope) {
+        $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+        $scope.addTodo = function () {
+          $scope.todos.push($scope.todo);
+          $scope.todo = '';
+        };
+      });
+
+View the app in the browser again. Type some text in the input field for a new todo item and hit the Add button. It will be immediately reflected in your todos list. Here you can see I have added 2 new todos.
+
+**Note**: if you enter in more than one blank todo item, or a todo item with the same name, your todo app will unexpectedly stop working. :( As a fun exercise on your own time, enhance the addTodo function with error checking.
+
+![preview](.guides/img/preview-3.png)
+---
 title: Adding a Remove Button
 files:
   - path: app/views/main.html
     action: open
     panel: 0
     ref: "<!-- Todos list -->"
-    lineCount: 4
+    lineCount: 7
 editable: true
 layout: ""
 
@@ -591,7 +590,8 @@ files:
   - path: app/index.html
     action: close
     panel: 0
-    ref: ""
+    ref: "<!-- Todos list -->"
+    lineCount: 9
 editable: true
 layout: ""
 
@@ -742,20 +742,15 @@ Our tests are currently failing as we haven’t updated the boilerplate test whi
 ---
 title: Modify test main.js
 files:
-  - path: app/scripts/controllers/main.js
-    action: open
-    panel: 0
-    ref: "$scope.todos = ['Item 1', 'Item 2', 'Item 3'];"
-    lineCount: 1
-  - path: test/karma.conf.js
-    action: close
-    panel: 0
-    ref: ""
-  - path: " test/spec/controllers/main.js"
+  - path: "app/scripts/controllers/main.js, test/spec/controllers/main.js"
     action: open
     panel: 0
     ref: "it('should attach a list of awesomeThings to the scope', function () {"
     lineCount: 3
+  - path: test/karma.conf.js
+    action: close
+    panel: 0
+    ref: ""
 editable: true
 layout: ""
 
@@ -998,8 +993,11 @@ So now, rather than reading our todos from a static array, we’ll be reading it
 
 We’ll also use the angular [$watch](http://docs.angularjs.org/api/ng.$rootScope.Scope#methods_$watch) listener to watch for changes in the value of `$scope.todos`. If someone adds or removes a todo, it will then keep our `localStorage` todos datastore in sync.
 
-Therefore, we need to change the current `$scope.todos` declaration to:
+Therefore, we need to remove the current `$scope.todos` declaration:
 
+    $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
+
+And replace it with this:
 
     var todosInStore = localStorageService.get('todos');
 
