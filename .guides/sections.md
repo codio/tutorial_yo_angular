@@ -178,8 +178,7 @@ files:
   - path: Gruntfile.js
     action: open
     panel: 0
-    ref: "// Change this to '0.0.0.0' to access the server from outside."
-    lineCount: 4
+    ref: ""
 editable: true
 layout: ""
 
@@ -354,6 +353,7 @@ Your browser should now show something like this
 title: Adding a ToDo
 files:
   - path: app/views/main.html
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -394,6 +394,7 @@ This adds a form with a submit button to the top of the page. It utilises anothe
 title: Making the Add button work
 files:
   - path: app/scripts/controllers/main.js
+    action: open
     panel: 0
     ref: ""
     lineCount: 0
@@ -590,8 +591,7 @@ files:
   - path: app/index.html
     action: close
     panel: 0
-    ref: "<!-- Todos list -->"
-    lineCount: 9
+    ref: ""
 editable: true
 layout: ""
 
