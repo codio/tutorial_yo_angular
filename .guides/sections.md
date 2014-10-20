@@ -219,7 +219,7 @@ Also (around line 165) remove the following from the wiredep section:
 		options: {
    		cwd: '<%%= yeoman.app %>'
 			},
-		}
+
 
 
 	
